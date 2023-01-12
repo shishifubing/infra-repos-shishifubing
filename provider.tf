@@ -1,4 +1,8 @@
 terraform {
+  backend "s3" {
+
+  }
+
   required_providers {
     github = {
       source  = "integrations/github"
@@ -7,6 +11,11 @@ terraform {
   }
 }
 
+locals {
+  owner     = "shishifubing-com"
+  owner_url = "https://github.com/${local.owner}"
+}
+
 provider "github" {
-  owner = "shishifubing-com"
+  owner = local.owner
 }
