@@ -1,0 +1,6 @@
+endpoint                    = "storage.yandexcloud.net"
+bucket                      = "jingyangzhenren-production-terraform"
+region                      = "ru-central1-a"
+key                         = "main.tfstate"
+skip_region_validation      = true
+skip_credentials_validation = true
