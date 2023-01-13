@@ -23,10 +23,14 @@ terraform init -reconfigure -backend-config="./main.s3.tfbackend"
 # initialize gh
 # skip this step if you are already logged in
 gh auth login --with-token <"${your_token_path}"
+# clean the state if you need to
+./clean.sh
 # import repositories
 # if you cannot import a repository, check yout github token
 ./import.sh
 # update the infrastructure
+# GitHub's servers are "eventually consistent" and not
+# "immediately consistent", so if you get errors, wait a minute and try again
 terraform apply
 ```
 

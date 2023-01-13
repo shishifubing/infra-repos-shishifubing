@@ -1,5 +1,4 @@
 infra-repos-shishifubing-com:
-  name: infra-repos-shishifubing-com
   description: >-
     Terraform module managing repositories in ${owner_url}
   topics:
@@ -8,7 +7,6 @@ infra-repos-shishifubing-com:
     - terraform-github
 
 job-ghaction-readme-scc-code-count:
-  name: job-ghaction-readme-scc-code-count
   description: >-
     Github action to add and update code count in the README.md of a project
   topics:
@@ -16,14 +14,12 @@ job-ghaction-readme-scc-code-count:
     - scc
 
 .github:
-  name: .github
   description: >-
     Organization readme
   topics:
     - readme
 
 infra-cloud-shishifubing.com:
-  name: infra-cloud-shishifubing.com
   description: >-
     Cloud infrastructure for shishifubing.com
   topics:
@@ -33,7 +29,6 @@ infra-cloud-shishifubing.com:
     - infrastructure
 
 misc-personal-dotfiles:
-  name: misc-personal-dotfiles
   description: >-
     Bash scripts, configs, ansible playbooks, terraform modules
   topics:
@@ -45,16 +40,13 @@ misc-personal-dotfiles:
     - firefox-css
 
 shishifubing-com.github.io:
-  name: shishifubing-com.github.io
   description: >-
     Personal site
-  pages_cname: shishifubing.com
   topics:
     - github-io
     - github-pages
 
 app-android-anki-chinese-flashcards-enricher:
-  name: app-android-anki-chinese-flashcards-enricher
   description: >-
     Android app to streamline my Chinese learning workflow
   topics:
@@ -63,7 +55,6 @@ app-android-anki-chinese-flashcards-enricher:
     - kotlin
 
 plugin-firefox-new-tab-bookmarks:
-  name: plugin-firefox-new-tab-bookmarks
   description: >-
     Simple plugin for Firefox
   topics:
@@ -72,7 +63,6 @@ plugin-firefox-new-tab-bookmarks:
     - firefox-addon
 
 app-desktop-useless-cpp-gui:
-  name: app-desktop-useless-cpp-gui
   description: >-
     Desktop GUI written using C++ and Qt, it does absolutely nothing
   topics:
@@ -84,7 +74,6 @@ app-desktop-useless-cpp-gui:
     - qt5
 
 snippets-javascript-assignments:
-  name: snippets-javascript-assignments
   description: >-
     Javascript assignments
   topics:
@@ -95,7 +84,6 @@ snippets-javascript-assignments:
     - javascrpt
 
 app-web-crawler-book-creator:
-  name: app-web-crawler-book-creator
   description: >-
     Web scraper I was building in java a long time ago and started
     remaking using Django
@@ -106,7 +94,6 @@ app-web-crawler-book-creator:
     - web-scraping
 
 app-web-tianyi:
-  name: app-web-tianyi
   description: >-
     SPA CI/CD app
   topics:
@@ -126,7 +113,6 @@ app-web-tianyi:
     - vuejs3
 
 app-cli-autoscroll:
-  name: app-cli-autoscroll
   description: >-
     Cross-platform CLI app enabling autoscroll
   topics:
@@ -136,7 +122,6 @@ app-cli-autoscroll:
     - cli-app
 
 app-web-django-assignment:
-  name: app-web-django-assignment
   description: >-
     SSR web app
   topics:
@@ -153,7 +138,6 @@ app-web-django-assignment:
     - webapp
 
 snippets-golang-leetcode:
-  name: snippets-golang-leetcode
   description: >-
     Some leetcode tasks
   topics:
@@ -163,7 +147,6 @@ snippets-golang-leetcode:
     - leetcode-solutions
 
 plugin-sonatype-nexus-security-check:
-  name: plugin-sonatype-nexus-security-check
   description: >-
     Security plugin for Sonatype Nexus 3
   topics:

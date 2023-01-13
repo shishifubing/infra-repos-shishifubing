@@ -63,7 +63,7 @@ resource "github_repository" "repositories" {
     each.value, "is_template", local.is_template
   )
   homepage_url = lookup(
-    each.value, "homepage_url", "${local.owner_url}/${each.value.name}"
+    each.value, "homepage_url", "https://${local.domain}/${each.key}"
   )
   topics = concat(
     lookup(each.value, "topics", []), [local.owner]
@@ -114,6 +114,17 @@ resource "github_repository" "repositories" {
     each.value, "delete_branch_on_merge", local.delete_branch_on_merge
   )
 
+
+  /* can't use it
+     - 422 Invalid request. Invalid property /source: `` is not a
+       possible value. Must be one of the following: /, /docs.
+
+       no idea, default path is "/", everything should be fine
+     - 404 Not Found []
+
+       no idea, probably because GHPages are not deployed
+
+
   // pages
   pages {
     cname = lookup(
@@ -128,6 +139,14 @@ resource "github_repository" "repositories" {
       )
     }
   }
+  */
+
+  /* can't use it
+     - Error: `422 Advanced security is always available for public repos []`
+
+       `advanced_security` block is required if you specify
+       `security_and_analysis`, so if the repository is public, you cannot
+       use `security_and_analysis` at all
 
   // security
   security_and_analysis {
@@ -151,4 +170,5 @@ resource "github_repository" "repositories" {
       )
     }
   }
+  */
 }
