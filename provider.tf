@@ -11,12 +11,6 @@ terraform {
   }
 }
 
-locals {
-  owner     = "shishifubing-com"
-  domain    = "shishifubing.com"
-  owner_url = "https://github.com/${local.owner}"
-}
-
 provider "github" {
-  owner = local.owner
+  owner = var.owner
 }

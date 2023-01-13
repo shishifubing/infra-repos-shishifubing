@@ -45,6 +45,7 @@ shishifubing-com.github.io:
   topics:
     - github-io
     - github-pages
+  homepage_url: https://shishifubing.com
   pages:
     cname: shishifubing.com
 
