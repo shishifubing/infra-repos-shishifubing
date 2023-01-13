@@ -8,5 +8,5 @@ repos=$(
 )
 read -ra repos <<<"${repos}"
 for repo in "${repos[@]}"; do
-    terraform import "github_repository.${repo}" "${repo}"
+    terraform import "github_repository.repositories[\"${repo}\"]" "${repo}"
 done

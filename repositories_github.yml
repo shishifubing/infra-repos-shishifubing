@@ -1,0 +1,178 @@
+infra-repos-shishifubing-com:
+  name: infra-repos-shishifubing-com
+  description: >-
+    Terraform module managing repositories in ${owner_url}
+  topics:
+    - infrastructure
+    - terraform
+    - terraform-github
+
+job-ghaction-readme-scc-code-count:
+  name: job-ghaction-readme-scc-code-count
+  description: >-
+    Github action to add and update code count in the README.md of a project
+  topics:
+    - github-action
+    - scc
+
+.github:
+  name: .github
+  description: >-
+    Organization readme
+  topics:
+    - readme
+
+infra-cloud-shishifubing.com:
+  name: infra-cloud-shishifubing.com
+  description: >-
+    Cloud infrastructure for shishifubing.com
+  topics:
+    - terraform
+    - cloud
+    - yandex-cloud
+    - infrastructure
+
+misc-personal-dotfiles:
+  name: misc-personal-dotfiles
+  description: >-
+    Bash scripts, configs, ansible playbooks, terraform modules
+  topics:
+    - vim
+    - bash
+    - firefox
+    - ansible
+    - vimrc
+    - firefox-css
+
+shishifubing-com.github.io:
+  name: shishifubing-com.github.io
+  description: >-
+    Personal site
+  pages_cname: shishifubing.com
+  topics:
+    - github-io
+    - github-pages
+
+app-android-anki-chinese-flashcards-enricher:
+  name: app-android-anki-chinese-flashcards-enricher
+  description: >-
+    Android app to streamline my Chinese learning workflow
+  topics:
+    - app
+    - android
+    - kotlin
+
+plugin-firefox-new-tab-bookmarks:
+  name: plugin-firefox-new-tab-bookmarks
+  description: >-
+    Simple plugin for Firefox
+  topics:
+    - javascript
+    - firefox
+    - firefox-addon
+
+app-desktop-useless-cpp-gui:
+  name: app-desktop-useless-cpp-gui
+  description: >-
+    Desktop GUI written using C++ and Qt, it does absolutely nothing
+  topics:
+    - desktop-app
+    - gui
+    - qt
+    - cpp
+    - abandoned
+    - qt5
+
+snippets-javascript-assignments:
+  name: snippets-javascript-assignments
+  description: >-
+    Javascript assignments
+  topics:
+    - css
+    - html
+    - html5
+    - css3
+    - javascrpt
+
+app-web-crawler-book-creator:
+  name: app-web-crawler-book-creator
+  description: >-
+    Web scraper I was building in java a long time ago and started
+    remaking using Django
+  topics:
+    - python
+    - django
+    - python3
+    - web-scraping
+
+app-web-tianyi:
+  name: app-web-tianyi
+  description: >-
+    SPA CI/CD app
+  topics:
+    - javascript
+    - go
+    - html
+    - redis
+    - golang
+    - vuejs
+    - spa
+    - html5
+    - postgresql
+    - scss
+    - abandoned
+    - webapp
+    - vuex-store
+    - vuejs3
+
+app-cli-autoscroll:
+  name: app-cli-autoscroll
+  description: >-
+    Cross-platform CLI app enabling autoscroll
+  topics:
+    - python
+    - pyqt5
+    - python3
+    - cli-app
+
+app-web-django-assignment:
+  name: app-web-django-assignment
+  description: >-
+    SSR web app
+  topics:
+    - javascript
+    - css
+    - python
+    - html
+    - bootstrap
+    - django
+    - html5
+    - ssr
+    - css3
+    - python3
+    - webapp
+
+snippets-golang-leetcode:
+  name: snippets-golang-leetcode
+  description: >-
+    Some leetcode tasks
+  topics:
+    - go
+    - golang
+    - leetcode
+    - leetcode-solutions
+
+plugin-sonatype-nexus-security-check:
+  name: plugin-sonatype-nexus-security-check
+  description: >-
+    Security plugin for Sonatype Nexus 3
+  topics:
+    - plugin
+    - java
+    - maven
+    - nexus
+    - sonatype-nexus
+    - nexus3
+    - apache-karaf
+    - sonatype-nexus-plugin
+    - sonatype-nexus3

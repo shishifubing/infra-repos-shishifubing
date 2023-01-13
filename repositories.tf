@@ -1,7 +1,25 @@
 locals {
+
+  repositories = yamldecode(templatefile(
+    "${path.module}/repositories_github.yml", {
+      owner_url = local.owner_url
+    }
+  ))
+
+  // defaults
+
   // general settings
   archive_on_destroy = true
   visibility         = "public"
+  is_template        = false
+
+  // repository creation setttings
+  // add initial commit
+  auto_init = true
+  // the python template has a lot of stuff
+  gitignore_template = "Python"
+  // GNU Affero General Public License v3.0
+  license_template = "agpl-3.0"
 
   // `has` settings
   has_issues    = true
@@ -23,70 +41,114 @@ locals {
   security_secret_scanning                 = "enabled"
   security_secret_scanning_push_protection = "enabled"
 
-
-  // repository creation setttings
-  // add initial commit
-  auto_init = true
-  // the python template has a lot of stuff
-  gitignore_template = "Python"
-  // GNU Affero General Public License v3.0
-  license_template = "agpl-3.0"
+  // pages
+  pages_source_branch = "main"
+  pages_source_path   = "/"
 }
 
-resource "github_repository" "infra-repos-shishifubing-com" {
-  name = "infra-repos-shishifubing-com"
-  description = join(" ", [
-    "Terraform module managing repositories in",
-    "https://github.com/shishifubing-com"
-  ])
+resource "github_repository" "repositories" {
+  for_each = local.repositories
 
-  security_and_analysis {
-    advanced_security {
-      status = local.security_advanced_security
-    }
-    secret_scanning {
-      status = local.security_secret_scanning
-    }
-    secret_scanning_push_protection {
-      status = local.security_secret_scanning_push_protection
+  name        = each.key
+  description = each.value.description
+
+  // general settings
+  archive_on_destroy = lookup(
+    each.value, "archive_on_destroy", local.archive_on_destroy
+  )
+  visibility = lookup(
+    each.value, "visibility", local.visibility
+  )
+  is_template = lookup(
+    each.value, "is_template", local.is_template
+  )
+  homepage_url = lookup(
+    each.value, "homepage_url", "${local.owner_url}/${each.value.name}"
+  )
+  topics = concat(
+    lookup(each.value, "topics", []), [local.owner]
+  )
+
+  // repository creation setttings
+  auto_init = lookup(
+    each.value, "auto_init", local.auto_init
+  )
+  gitignore_template = lookup(
+    each.value, "gitignore_template", local.gitignore_template
+  )
+  license_template = lookup(
+    each.value, "license_template", local.license_template
+  )
+
+  // `has` settings
+  has_issues = lookup(
+    each.value, "has_issues", local.has_issues
+  )
+  has_wiki = lookup(
+    each.value, "has_wiki", local.has_wiki
+  )
+  has_downloads = lookup(
+    each.value, "has_downloads", local.has_downloads
+  )
+  has_projects = lookup(
+    each.value, "has_projects", local.has_projects
+  )
+
+  // PR settings
+  allow_auto_merge = lookup(
+    each.value, "allow_auto_merge", local.allow_auto_merge
+  )
+  allow_merge_commit = lookup(
+    each.value, "allow_merge_commit", local.allow_merge_commit
+  )
+  allow_rebase_merge = lookup(
+    each.value, "allow_rebase_merge", local.allow_rebase_merge
+  )
+  allow_squash_merge = lookup(
+    each.value, "allow_squash_merge", local.allow_squash_merge
+  )
+  allow_update_branch = lookup(
+    each.value, "allow_update_branch", local.allow_update_branch
+  )
+  delete_branch_on_merge = lookup(
+    each.value, "delete_branch_on_merge", local.delete_branch_on_merge
+  )
+
+  // pages
+  pages {
+    cname = lookup(
+      each.value, "pages_cname", ""
+    )
+    source {
+      branch = lookup(
+        each.value, "pages_source_branch", local.pages_source_branch
+      )
+      path = lookup(
+        each.value, "pages_source_path", local.pages_source_path
+      )
     }
   }
 
-  // custom settings
-  homepage_url = "${local.owner_url}/infra-repos-shishifubing-com"
-
-  // default settings
-  visibility             = local.visibility
-  allow_auto_merge       = local.allow_auto_merge
-  allow_merge_commit     = local.allow_merge_commit
-  allow_rebase_merge     = local.allow_rebase_merge
-  allow_squash_merge     = local.allow_squash_merge
-  allow_update_branch    = local.allow_update_branch
-  archive_on_destroy     = local.archive_on_destroy
-  auto_init              = local.auto_init
-  delete_branch_on_merge = local.delete_branch_on_merge
-  gitignore_template     = local.gitignore_template
-  license_template       = local.license_template
-  has_issues             = local.has_issues
-  has_wiki               = local.has_wiki
-  has_downloads          = local.has_downloads
-  has_projects           = local.has_projects
+  // security
+  security_and_analysis {
+    advanced_security {
+      status = lookup(
+        each.value,
+        "security_advanced_security",
+        local.security_advanced_security
+      )
+    }
+    secret_scanning {
+      status = lookup(
+        each.value, "security_secret_scanning", local.security_secret_scanning
+      )
+    }
+    secret_scanning_push_protection {
+      status = lookup(
+        each.value,
+        "security_secret_scanning_push_protection",
+        local.security_secret_scanning_push_protection
+      )
+    }
+  }
 }
-
-
-
-# job-ghaction-readme-scc-code-count
-# .github
-# infra-cloud-shishifubing.com
-# misc-personal-dotfiles
-# shishifubing-com.github.io
-# app-android-anki-chinese-flashcards-enricher
-# plugin-firefox-new-tab-bookmarks
-# app-desktop-useless-cpp-gui
-# snippets-javascript-assignments
-# app-web-crawler-book-creator
-# app-web-tianyi
-# app-cli-autoscroll
-# app-web-django-assignment
-# snippets-golang-leetcode
-# plugin-sonatype-nexus-security-check
