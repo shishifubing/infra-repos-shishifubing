@@ -4,6 +4,13 @@ Terraform module managing repositories in [shishifubing-com]
 
 # Usage
 
+> **Note**
+>
+> GitHub's servers are "eventually consistent", not "immediately consistent".
+> If you encounter errors (especially code 422), retry the operation
+>
+> 404 errors probably mean invalid token, check it
+
 ```bash
 # export auth variables
 . ./variables.sh
@@ -20,17 +27,11 @@ terraform apply
 . ./variables.sh
 # initialize the backend
 terraform init -reconfigure -backend-config="./main.s3.tfbackend"
-# initialize gh
-# skip this step if you are already logged in
-gh auth login --with-token <"${your_token_path}"
 # clean the state if you need to
 ./clean.sh
-# import repositories
-# if you cannot import a repository, check yout github token
+# import existing repositories (if you need to)
 ./import.sh
 # update the infrastructure
-# GitHub's servers are "eventually consistent" and not
-# "immediately consistent", so if you get errors, wait a minute and try again
 terraform apply
 ```
 

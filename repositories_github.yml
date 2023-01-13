@@ -45,6 +45,8 @@ shishifubing-com.github.io:
   topics:
     - github-io
     - github-pages
+  pages:
+    cname: shishifubing.com
 
 app-android-anki-chinese-flashcards-enricher:
   description: >-

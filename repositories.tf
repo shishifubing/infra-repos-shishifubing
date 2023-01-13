@@ -56,9 +56,8 @@ resource "github_repository" "repositories" {
   name        = each.key
   description = each.value.description
 
-  // template
   dynamic "template" {
-    # if there is a template definition - create a block,
+    # if there is a template definition - create the block,
     # if there is none - do not create it
     for_each = contains(
       keys(each.value), "template"
@@ -140,42 +139,26 @@ resource "github_repository" "repositories" {
     each.value, "delete_branch_on_merge", local.delete_branch_on_merge
   )
 
-
-
-  /* can't use it
-     - 422 Invalid request. Invalid property /source: `` is not a
-       possible value. Must be one of the following: /, /docs.
-
-       no idea, default path is "/", everything should be fine
-     - 404 Not Found []
-
-       no idea, probably because GHPages are not deployed
-
-
-  // pages
-  pages {
-    cname = lookup(
-      each.value, "pages_cname", ""
-    )
-    source {
-      branch = lookup(
-        each.value, "pages_source_branch", local.pages_source_branch
-      )
-      path = lookup(
-        each.value, "pages_source_path", local.pages_source_path
-      )
+  // template
+  dynamic "pages" {
+    # if there is a template definition - create the block,
+    # if there is none - do not create it
+    for_each = contains(
+      keys(each.value), "pages"
+    ) ? [each.value.pages] : []
+    content {
+      cname = pages.value.cname
+      source {
+        branch = lookup(
+          pages.value, "branch", local.pages_source_branch
+        )
+        path = lookup(
+          pages.value, "path", local.pages_source_path
+        )
+      }
     }
   }
-  */
 
-  /* can't use it
-     - Error: `422 Advanced security is always available for public repos []`
-
-       `advanced_security` block is required if you specify
-       `security_and_analysis`, so if the repository is public, you cannot
-       use `security_and_analysis` at all
-
-  // security
   security_and_analysis {
     advanced_security {
       status = lookup(
@@ -197,5 +180,4 @@ resource "github_repository" "repositories" {
       )
     }
   }
-  */
 }
