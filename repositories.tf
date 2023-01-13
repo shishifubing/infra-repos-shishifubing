@@ -44,6 +44,10 @@ locals {
   // pages
   pages_source_branch = "main"
   pages_source_path   = "/"
+
+  // template
+  template_content_include_all_branches = false
+  template_content_owner                = local.owner
 }
 
 resource "github_repository" "repositories" {
@@ -51,6 +55,28 @@ resource "github_repository" "repositories" {
 
   name        = each.key
   description = each.value.description
+
+  // template
+  dynamic "template" {
+    # if there is a template definition - create a block,
+    # if there is none - do not create it
+    for_each = contains(
+      keys(each.value), "template"
+    ) ? [each.value.template] : []
+    content {
+      include_all_branches = lookup(
+        template.value,
+        "include_all_branches",
+        local.template_content_include_all_branches
+      )
+      owner = lookup(
+        template.value,
+        "owner",
+        local.template_content_owner
+      )
+      repository = template.value.repository
+    }
+  }
 
   // general settings
   archive_on_destroy = lookup(
@@ -113,6 +139,7 @@ resource "github_repository" "repositories" {
   delete_branch_on_merge = lookup(
     each.value, "delete_branch_on_merge", local.delete_branch_on_merge
   )
+
 
 
   /* can't use it
