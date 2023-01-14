@@ -60,13 +60,11 @@ terraform-docs markdown table --recursive --output-file README.md .
 ```
 
 <!-- BEGIN_TF_DOCS -->
-
 ## Requirements
 
-| Name                                                            | Version |
-| --------------------------------------------------------------- | ------- |
-| <a name="requirement_github"></a> [github](#requirement_github) | 5.14.0  |
-| <a name="requirement_utils"></a> [utils](#requirement_utils)    | 1.6.0   |
+| Name | Version |
+|------|---------|
+| <a name="requirement_github"></a> [github](#requirement\_github) | 5.14.0 |
 
 ## Providers
 
@@ -74,9 +72,10 @@ No providers.
 
 ## Modules
 
-| Name                                                                    | Source               | Version |
-| ----------------------------------------------------------------------- | -------------------- | ------- |
-| <a name="module_repositories"></a> [repositories](#module_repositories) | ./modules/repository | n/a     |
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_branch_protections"></a> [branch\_protections](#module\_branch\_protections) | ./modules/branch_protection | n/a |
+| <a name="module_repositories"></a> [repositories](#module\_repositories) | ./modules/repository | n/a |
 
 ## Resources
 
@@ -89,5 +88,4 @@ No inputs.
 ## Outputs
 
 No outputs.
-
 <!-- END_TF_DOCS -->

@@ -3,15 +3,14 @@ module "repositories" {
   source   = "./modules/repository"
 
   repository_name = each.key
-  repository      = jsonencode(each.value)
+  config          = each.value
 }
 
 module "branch_protections" {
-  for_each   = local.branch_protections
-  depends_on = [module.repositories]
-  source     = "./modules/branch_protection"
+  for_each = local.branch_protections
+  source   = "./modules/branch_protection"
 
-  branch_protection = jsonencode(each.value)
+  config = each.value
 }
 
 locals {
@@ -38,6 +37,27 @@ locals {
     ]
   ])
 
+  # default branch_protection config
+  branch_protections_main = {
+    main = {
+      enforce_admins = true
+    }
+  }
+
+  # dictionary of topics to reuse
+  topics = {
+    common       = [local.owner]
+    yandex_cloud = ["cloud", "yandex-cloud"]
+    terraform    = ["infrastructure", "terraform"]
+    nexus        = ["nexus", "sonatype-nexus", "nexus3", "sonatype-nexus3"]
+    go           = ["go", "golang"]
+    web          = ["javascript", "css", "html", "html5", "css3", "webapp"]
+    python       = ["python", "python3"]
+    vuejs        = ["vuejs", "vuejs3"]
+    abandoned    = ["abandoned"]
+  }
+
+  # main repository config
   repositories = {
     "infra-repos-${local.owner}" = {
       description = join(" ", [
@@ -46,12 +66,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "infra-repos-${local.owner}"
       ])
-      topics = [
-        "infrastructure", "terraform", "terraform-github", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.common, local.topics.terraform, [
+
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "job-ghaction-readme-scc-code-count" = {
@@ -62,12 +80,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "job-ghaction-readme-scc-code-count"
       ])
-      topics = [
-        "github-action", "scc", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.common, [
+        "github-action", "scc"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     ".github" = {
@@ -77,28 +93,24 @@ locals {
       homepage_url = join("/", [
         local.owner_url, ".github"
       ])
-      topics = [
-        "readme", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.common, [
+        "readme"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "infra-cloud-${local.owner_fqdn}" = {
       description = join(" ", [
-        "Cloud infrastructure for shishifubing.com"
+        "Cloud infrastructure for ${local.owner_fqdn}"
       ])
       homepage_url = join("/", [
         local.owner_url, "infra-cloud-${local.owner_fqdn}"
       ])
-      topics = [
-        "terraform", "cloud", "yandex-cloud", "infrastructure",
-        local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(
+        local.topics.common, local.topics.terraform, local.topics.yandex_cloud,
+        []
+      )
+      branch_protections = local.branch_protections_main
     }
 
     "misc-personal-dotfiles" = {
@@ -108,13 +120,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "misc-personal-dotfiles"
       ])
-      topics = [
-        "vim", "bash", "firefox", "ansible", "vimrc", "firefox-css",
-        local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.common, [
+        "vim", "bash", "firefox", "ansible", "vimrc", "firefox-css"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "${local.owner}.github.io" = {
@@ -124,16 +133,14 @@ locals {
       homepage_url = join("/", [
         "https://${local.owner_fqdn}"
       ])
-      topics = [
-        "github-io", "github-pages", local.owner
-      ]
+      topics = concat(local.topics.common, [
+        "github-io", "github-pages"
+      ])
       pages = {
         enabled = true
         cname   = local.owner_fqdn
       }
-      branch_protections = {
-        main = {}
-      }
+      branch_protections = local.branch_protections_main
     }
 
     "app-android-anki-chinese-flashcards-enricher" = {
@@ -143,12 +150,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "app-android-anki-chinese-flashcards-enricher"
       ])
-      topics = [
-        "app", "android", "kotlin", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.common, [
+        "app", "android", "kotlin"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "plugin-firefox-new-tab-bookmarks" = {
@@ -158,12 +163,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "plugin-firefox-new-tab-bookmarks"
       ])
-      topics = [
-        "javascript", "firefox", "firefox-addon", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.common, [
+        "javascript", "firefox", "firefox-addon"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "app-desktop-useless-cpp-gui" = {
@@ -173,12 +176,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "app-desktop-useless-cpp-gui"
       ])
-      topics = [
-        "desktop-app", "gui", "qt", "cpp", "abandoned", "qt5", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.common, local.topics.abandoned, [
+        "desktop-app", "gui", "qt", "cpp", "qt5"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "snippets-javascript-assignments" = {
@@ -188,12 +189,8 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "snippets-javascript-assignments"
       ])
-      topics = [
-        "css", "html", "html5", "css3", "javascript", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics             = concat(local.topics.web, local.topics.common)
+      branch_protections = local.branch_protections_main
     }
 
     "app-web-crawler-book-creator" = {
@@ -204,12 +201,11 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "app-web-crawler-book-creator"
       ])
-      topics = [
-        "python", "django", "python3", "web-scraping", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(
+        local.topics.common, local.topics.python, local.topics.abandoned,
+        local.topics.web, ["django", "web-scraping"]
+      )
+      branch_protections = local.branch_protections_main
     }
 
     "app-web-tianyi" = {
@@ -219,14 +215,12 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "app-web-tianyi"
       ])
-      topics = [
-        "javascript", "go", "html", "redis", "golang", "vuejs", "spa", "html5",
-        "postgresql", "scss", "abandoned", "webapp", "vuex-store", "vuejs3",
-        local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(
+        local.topics.go, local.topics.web, local.topics.vuejs,
+        local.topics.abandoned, local.topics.common,
+        ["redis", "spa", "postgresql", "scss", "vuex-store"]
+      )
+      branch_protections = local.branch_protections_main
     }
 
     "app-cli-autoscroll" = {
@@ -236,12 +230,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "app-cli-autoscroll"
       ])
-      topics = [
-        "python", "pyqt5", "python3", "cli-app", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.python, local.topics.common, [
+        "pyqt5", "cli-app"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "app-web-django-assignment" = {
@@ -251,13 +243,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "app-web-django-assignment"
       ])
-      topics = [
-        "javascript", "css", "python", "html", "bootstrap", "django", "html5",
-        "ssr", "css3", "python3", "webapp", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.web, local.topics.common, [
+        "python", "bootstrap", "django", "ssr", "python3"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "snippets-golang-leetcode" = {
@@ -267,12 +256,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "snippets-golang-leetcode"
       ])
-      topics = [
-        "go", "golang", "leetcode", "leetcode-solutions", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.go, local.topics.common, [
+        "leetcode", "leetcode-solutions"
+      ])
+      branch_protections = local.branch_protections_main
     }
 
     "plugin-sonatype-nexus-security-check" = {
@@ -282,13 +269,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "plugin-sonatype-nexus-security-check"
       ])
-      topics = [
-        "plugin", "java", "maven", "nexus", "sonatype-nexus", "nexus3",
-        "apache-karaf", "sonatype-nexus-plugin", "sonatype-nexus3", local.owner
-      ]
-      branch_protections = {
-        main = {}
-      }
+      topics = concat(local.topics.nexus, local.topics.common, [
+        "plugin", "java", "maven", "apache-karaf", "sonatype-nexus-plugin"
+      ])
+      branch_protections = local.branch_protections_main
     }
   }
 }
