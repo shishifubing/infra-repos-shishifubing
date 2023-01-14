@@ -12,11 +12,6 @@ jobs:
     steps:
       - uses: actions/github-script@v6
         name: Approve self-created pull requests
-        with:
-          script: console.log("check")
-
-      - uses: actions/github-script@v6
-        name: Approve self-created pull requests
         # if a user that created the PR is the same user that left a comment
         # and that comment starts with /approve, then autoapprove it
         if: >-
