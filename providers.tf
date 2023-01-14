@@ -6,6 +6,10 @@ terraform {
       source  = "integrations/github"
       version = "5.14.0"
     }
+    gitlab = {
+      source  = "gitlabhq/gitlab"
+      version = "15.7.1"
+    }
   }
 }
 
@@ -18,3 +22,5 @@ locals {
 provider "github" {
   owner = local.owner
 }
+
+provider "gitlab" {}

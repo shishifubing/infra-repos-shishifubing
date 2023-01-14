@@ -1,6 +1,10 @@
 # [`infra-repos-shishifubing-com`][repository-link]
 
-Terraform modules to manage repositories in [shishifubing-com]
+Terraform module that:
+
+- manages repositories in [shishifubing-com]
+- manages branch protection rules in [shishifubing-com]
+- mirrors all repositories in [shishifubing-com] to [Gitlab][shishifubing-com-gitlab]
 
 # Usage
 
@@ -17,6 +21,22 @@ Terraform modules to manage repositories in [shishifubing-com]
 . ./variables.sh
 # update the infrastructure
 terraform apply
+```
+
+## Mirror repositories
+
+> **Note**
+> Pull mirroring is a premium feature, so to mirror repositories you need to
+> recreate them
+
+```bash
+terraform apply -replace -target=gitlab_project.repository
+```
+
+## Regenerate module documentation
+
+```bash
+terraform-docs markdown table --recursive --output-file README.md .
 ```
 
 # Getting started
@@ -44,6 +64,7 @@ terraform apply
 <!-- external links -->
 
 [shishifubing-com]: https://github.com/shishifubing-com
+[shishifubing-com-gitlab]: https://gitlab.com/shishifubing-com
 [repository-link]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
 [terraform-provider]: https://registry.tfpla.net/providers/integrations/github/latest
 [setup]: https://github.com/shishifubing-com/infra-cloud-shishifubing.com#setup-terraform-backend-and-local-environment
@@ -53,18 +74,13 @@ terraform apply
 
 # Module documentation
 
-## Regenerate documentation
-
-```bash
-terraform-docs markdown table --recursive --output-file README.md .
-```
-
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_github"></a> [github](#requirement\_github) | 5.14.0 |
+| Name                                                            | Version |
+| --------------------------------------------------------------- | ------- |
+| <a name="requirement_github"></a> [github](#requirement_github) | 5.14.0  |
 
 ## Providers
 
@@ -72,10 +88,10 @@ No providers.
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_branch_protections"></a> [branch\_protections](#module\_branch\_protections) | ./modules/branch_protection | n/a |
-| <a name="module_repositories"></a> [repositories](#module\_repositories) | ./modules/repository | n/a |
+| Name                                                                                      | Source                      | Version |
+| ----------------------------------------------------------------------------------------- | --------------------------- | ------- |
+| <a name="module_branch_protections"></a> [branch_protections](#module_branch_protections) | ./modules/branch_protection | n/a     |
+| <a name="module_repositories"></a> [repositories](#module_repositories)                   | ./modules/repository        | n/a     |
 
 ## Resources
 
@@ -88,4 +104,5 @@ No inputs.
 ## Outputs
 
 No outputs.
+
 <!-- END_TF_DOCS -->
