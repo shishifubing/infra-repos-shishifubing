@@ -1,6 +1,37 @@
-# [`infra-repos-shishifubing-com`][repository]
+# [`infra-repos-shishifubing-com`][repository-link]
 
-Terraform module managing repositories in [shishifubing-com]
+Terraform modules to manage repositories in [shishifubing-com]
+
+# Module info
+
+## Requirements
+
+| Name                                                            | Version |
+| --------------------------------------------------------------- | ------- |
+| <a name="requirement_github"></a> [github](#requirement_github) | 5.14.0  |
+| <a name="requirement_utils"></a> [utils](#requirement_utils)    | 1.6.0   |
+
+## Providers
+
+No providers.
+
+## Modules
+
+| Name                                                                    | Source               | Version |
+| ----------------------------------------------------------------------- | -------------------- | ------- |
+| <a name="module_repositories"></a> [repositories](#module_repositories) | ./modules/repository | n/a     |
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
 
 # Usage
 
@@ -15,43 +46,8 @@ Terraform module managing repositories in [shishifubing-com]
 # export auth variables
 . ./variables.sh
 # update the infrastructure
-terraform apply -var-file="./main.tfvars"
+terraform apply
 ```
-
-## Example repository configuration
-
-```yml
-repository-name:
-  # required
-  description: >-
-    description of the repository
-
-  # optional
-  topics:
-    - github-io
-    - github-pages
-  pages:
-    cname: FQDN - example.com
-    branch: main
-    path: /
-  template:
-    include_all_branches: true
-    owner: octocat
-    repository: octocat.github.io
-  security_and_analysis:
-    advanced_security:
-      status: "enabled"
-    secret_scanning:
-      status: "enabled"
-    secret_scanning_push_protection:
-      status: "enabled"
-```
-
-For more information look in:
-
-- [repositories_github.yml]
-- [repositories.tf]
-- [main.tfvars]
 
 # Getting started
 
@@ -62,12 +58,12 @@ For more information look in:
 . ./variables.sh
 # initialize the backend
 terraform init -reconfigure -backend-config="./main.s3.tfbackend"
-# clean the state if you need to
+# clean the state (if you need to)
 ./clean.sh
 # import existing repositories (if you need to)
 ./import.sh
 # update the infrastructure
-terraform apply -var-file="./main.tfvars"
+terraform apply
 ```
 
 # Documentation
@@ -77,14 +73,18 @@ terraform apply -var-file="./main.tfvars"
 
 <!-- internal links -->
 
-[repositories_github.yml]: ./repositories_github.yml
-[repositories.tf]: ./repositories.tf
-[main.tfvars]: ./main.tfvars
+[branch_protection]: ./modules/branch_protection/
+[repository]: ./modules/repository/
+[merge]: ./modules/merge/
+[exclude_keys]: ./modules/exclude_keys/
 
 <!-- external links -->
 
 [shishifubing-com]: https://github.com/shishifubing-com
-[repository]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
+[repository-link]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
 [terraform-provider]: https://registry.tfpla.net/providers/integrations/github/latest
 [setup]: https://github.com/shishifubing-com/infra-cloud-shishifubing.com#setup-terraform-backend-and-local-environment
 [terraform-action]: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
+[github_repository]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/repository
+[github_branch_protection]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/branch_protection
+[deepmerge]: https://registry.tfpla.net/modules/Invicton-Labs/deepmerge/null/latest
