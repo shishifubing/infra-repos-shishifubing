@@ -1,11 +1,14 @@
 output "defaults" {
-  value = local.defaults
+  description = "built-in defaults"
+  value       = local.defaults
 }
 
 output "repository" {
-  value = github_repository.repository
+  description = "github_repository resource"
+  value       = github_repository.repository
 }
 
 output "config" {
-  value = local.conf
+  description = "repository config after merging with the defaults"
+  value       = local.conf
 }

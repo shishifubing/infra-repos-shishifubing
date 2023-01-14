@@ -6,20 +6,24 @@ module "repositories" {
   repository      = jsonencode(each.value)
 }
 
-# module "branch_protections" {
-#   for_each   = local.repositories
-#   depends_on = [module.repositories]
+module "branch_protections" {
+  for_each   = local.branch_protections
+  depends_on = [module.repositories]
+  source     = "./modules/branch_protection"
 
-#   source            = "./modules/branch_protection"
-#   repository_name   = each.key
-#   defaults          = local.branch_protection_defaults
-#   branch_protection = each.value.branch_protections
-# }
+  defaults          = {} #local.branch_protection_defaults
+  branch_protection = each.value.branch_protections
+}
 
 locals {
+  # create a map of branch_protections with unique keys for for_each
+  branch_protections = {
+    for item in local.branch_protections_list :
+    "${item.repository_id}/${item.pattern}" => item
+  }
   # inject branch protection patterns and repository ids into all
   # branch_protections defined in the repositories' configs
-  branch_protections = flatten([
+  branch_protections_list = flatten([
     for repository_name, repository_config in local.repositories : [
       for branch_protection_pattern, branch_protection_config in lookup(
         repository_config, "branch_protections", {}

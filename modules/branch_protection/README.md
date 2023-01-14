@@ -1,52 +1,62 @@
-# Repository module
+# [`Branch protection module`][repo-link]
 
 This module is a wrapper for Github's [github_branch_protection]
 
-It provides defaults to [github_branch_protection] to reduce boilerplate
+It provides defaults to reduce boilerplate
 
-It merges configs using [Invicton-Labs/deepmerge/null] in order:
+Merging order:
 
 - built-in defaults
-- defaults from the variable
-- config from the variable
-
-# Variables
-
-[variables.tf]
-
-```tf
-variable "defaults" {
-  description = "default values for the resource"
-  type        = any
-  default     = {}
-}
-
-variable "repository_name" {
-  description = "repository name"
-}
-
-variable "repository" {
-  description = "repository config"
-  type        = any
-}
-
-variable "branch_name" {
-  description = "branch name"
-  type        = string
-}
-
-variable "branch_protection" {
-  description = "branch protection config"
-  type        = any
-}
-```
+- provided defaults
+- provided branch protection config
 
 <!-- internal links -->
-
-[variables.tf]: ./variables.tf
 
 <!-- external links -->
 
 [github_repository]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/repository
 [github_branch_protection]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/branch_protection
-[invicton-labs/deepmerge/null]: https://registry.tfpla.net/modules/Invicton-Labs/deepmerge/null/latest
+[repo-link]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
+
+# Module documentation
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_github"></a> [github](#requirement\_github) | >= 5.0.0 |
+| <a name="requirement_utils"></a> [utils](#requirement\_utils) | >= 0.3.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_github"></a> [github](#provider\_github) | >= 5.0.0 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_merge"></a> [merge](#module\_merge) | ../merge | n/a |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [github_branch_protection.protection](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_protection) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_branch_protection"></a> [branch\_protection](#input\_branch\_protection) | branch protection config | `any` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_config"></a> [config](#output\_config) | branch protection config after merging with the defaults |
+| <a name="output_defaults"></a> [defaults](#output\_defaults) | built-in defaults |
+| <a name="output_resource"></a> [resource](#output\_resource) | github\_branch\_protection resource |
+<!-- END_TF_DOCS -->
