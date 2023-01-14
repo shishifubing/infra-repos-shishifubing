@@ -40,7 +40,7 @@ locals {
   # default branch_protection config
   branch_protections_main = {
     main = {
-      enforce_admins = true
+      enforce_admins = false
     }
   }
 
