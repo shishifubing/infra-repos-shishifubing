@@ -11,29 +11,30 @@ module "branch_protections" {
   depends_on = [module.repositories]
   source     = "./modules/branch_protection"
 
-  defaults          = {} #local.branch_protection_defaults
-  branch_protection = each.value.branch_protections
+  branch_protection = jsonencode(each.value)
 }
 
 locals {
-  # create a map of branch_protections with unique keys for for_each
+  # create a map of branch_protections with unique keys for `for_each`
   branch_protections = {
     for item in local.branch_protections_list :
     "${item.repository_id}/${item.pattern}" => item
   }
   # inject branch protection patterns and repository ids into all
-  # branch_protections defined in the repositories' configs
+  # branch_protections defined in the configs
   branch_protections_list = flatten([
     for repository_name, repository_config in local.repositories : [
       for branch_protection_pattern, branch_protection_config in lookup(
         repository_config, "branch_protections", {}
-        ) : [merge(
+        ) : [
+        merge(
           {
             pattern       = branch_protection_pattern,
             repository_id = repository_name
           },
           branch_protection_config
-      )]
+        )
+      ]
     ]
   ])
 
@@ -49,7 +50,7 @@ locals {
         "infrastructure", "terraform", "terraform-github", local.owner
       ]
       branch_protections = {
-
+        main = {}
       }
     }
 
@@ -64,6 +65,9 @@ locals {
       topics = [
         "github-action", "scc", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     ".github" = {
@@ -76,6 +80,9 @@ locals {
       topics = [
         "readme", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "infra-cloud-${local.owner_fqdn}" = {
@@ -89,6 +96,9 @@ locals {
         "terraform", "cloud", "yandex-cloud", "infrastructure",
         local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "misc-personal-dotfiles" = {
@@ -102,6 +112,9 @@ locals {
         "vim", "bash", "firefox", "ansible", "vimrc", "firefox-css",
         local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "${local.owner}.github.io" = {
@@ -118,6 +131,9 @@ locals {
         enabled = true
         cname   = local.owner_fqdn
       }
+      branch_protections = {
+        main = {}
+      }
     }
 
     "app-android-anki-chinese-flashcards-enricher" = {
@@ -130,6 +146,9 @@ locals {
       topics = [
         "app", "android", "kotlin", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "plugin-firefox-new-tab-bookmarks" = {
@@ -142,6 +161,9 @@ locals {
       topics = [
         "javascript", "firefox", "firefox-addon", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "app-desktop-useless-cpp-gui" = {
@@ -154,6 +176,9 @@ locals {
       topics = [
         "desktop-app", "gui", "qt", "cpp", "abandoned", "qt5", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "snippets-javascript-assignments" = {
@@ -166,6 +191,9 @@ locals {
       topics = [
         "css", "html", "html5", "css3", "javascript", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "app-web-crawler-book-creator" = {
@@ -179,6 +207,9 @@ locals {
       topics = [
         "python", "django", "python3", "web-scraping", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "app-web-tianyi" = {
@@ -193,6 +224,9 @@ locals {
         "postgresql", "scss", "abandoned", "webapp", "vuex-store", "vuejs3",
         local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "app-cli-autoscroll" = {
@@ -205,6 +239,9 @@ locals {
       topics = [
         "python", "pyqt5", "python3", "cli-app", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "app-web-django-assignment" = {
@@ -218,6 +255,9 @@ locals {
         "javascript", "css", "python", "html", "bootstrap", "django", "html5",
         "ssr", "css3", "python3", "webapp", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "snippets-golang-leetcode" = {
@@ -230,6 +270,9 @@ locals {
       topics = [
         "go", "golang", "leetcode", "leetcode-solutions", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
 
     "plugin-sonatype-nexus-security-check" = {
@@ -243,6 +286,9 @@ locals {
         "plugin", "java", "maven", "nexus", "sonatype-nexus", "nexus3",
         "apache-karaf", "sonatype-nexus-plugin", "sonatype-nexus3", local.owner
       ]
+      branch_protections = {
+        main = {}
+      }
     }
   }
 }

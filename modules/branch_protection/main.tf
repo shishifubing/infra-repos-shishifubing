@@ -45,4 +45,5 @@ resource "github_branch_protection" "protection" {
       require_last_push_approval      = local.pr_reviews.require_last_push_approval
     }
   }
+
 }
