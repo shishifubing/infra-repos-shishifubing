@@ -6,10 +6,6 @@ terraform {
       source  = "integrations/github"
       version = "5.14.0"
     }
-    utils = {
-      source  = "cloudposse/utils"
-      version = "1.6.0"
-    }
   }
 }
 
@@ -22,5 +18,3 @@ locals {
 provider "github" {
   owner = local.owner
 }
-
-provider "utils" {}

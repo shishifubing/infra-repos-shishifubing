@@ -65,7 +65,6 @@ terraform-docs markdown table --recursive --output-file README.md .
 | Name | Version |
 |------|---------|
 | <a name="requirement_github"></a> [github](#requirement\_github) | 5.14.0 |
-| <a name="requirement_utils"></a> [utils](#requirement\_utils) | 1.6.0 |
 
 ## Providers
 
