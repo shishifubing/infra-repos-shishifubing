@@ -3,18 +3,61 @@ module "repositories" {
   source   = "./modules/repository"
 
   repository_name = each.key
-  repository      = jsonencode(each.value)
+  config          = each.value
 }
 
 module "branch_protections" {
-  for_each   = local.branch_protections
-  depends_on = [module.repositories]
-  source     = "./modules/branch_protection"
+  for_each = local.branch_protections
+  source   = "./modules/branch_protection"
 
-  branch_protection = jsonencode(each.value)
+  config = each.value
 }
 
 locals {
+  # create a map of branch_protections with unique keys for `for_each`
+  branch_protections = {
+    for item in local.branch_protections_list :
+    "${item.repository_id}/${item.pattern}" => item
+  }
+  # inject branch protection patterns and repository ids into all
+  # branch_protections defined in the configs
+  branch_protections_list = flatten([
+    for repository_name, repository_config in local.repositories : [
+      for branch_protection_pattern, branch_protection_config in lookup(
+        repository_config, "branch_protections", {}
+        ) : [
+        merge(
+          {
+            pattern       = branch_protection_pattern,
+            repository_id = repository_name
+          },
+          branch_protection_config
+        )
+      ]
+    ]
+  ])
+
+  # default branch_protection config
+  branch_protections_main = {
+    main = {
+      enforce_admins = true
+    }
+  }
+
+  # dictionary of topics to reuse
+  topics = {
+    common       = [local.owner]
+    yandex_cloud = ["cloud", "yandex-cloud"]
+    terraform    = ["infrastructure", "terraform"]
+    nexus        = ["nexus", "sonatype-nexus", "nexus3", "sonatype-nexus3"]
+    go           = ["go", "golang"]
+    web          = ["javascript", "css", "html", "html5", "css3", "webapp"]
+    python       = ["python", "python3"]
+    vuejs        = ["vuejs", "vuejs3"]
+    abandoned    = ["abandoned"]
+  }
+
+  # main repository config
   repositories = {
     "infra-repos-${local.owner}" = {
       description = join(" ", [
@@ -58,7 +101,7 @@ locals {
 
     "infra-cloud-${local.owner_fqdn}" = {
       description = join(" ", [
-        "Cloud infrastructure for shishifubing.com"
+        "Cloud infrastructure for ${local.owner_fqdn}"
       ])
       homepage_url = join("/", [
         local.owner_url, "infra-cloud-${local.owner_fqdn}"
@@ -231,47 +274,5 @@ locals {
       ])
       branch_protections = local.branch_protections_main
     }
-  }
-
-  branch_protections_main = {
-    main = {
-      enforce_admins = true
-    }
-  }
-
-  # create a map of branch_protections with unique keys for `for_each`
-  branch_protections = {
-    for item in local.branch_protections_list :
-    "${item.repository_id}/${item.pattern}" => item
-  }
-  # inject branch protection patterns and repository ids into all
-  # branch_protections defined in the configs
-  branch_protections_list = flatten([
-    for repository_name, repository_config in local.repositories : [
-      for branch_protection_pattern, branch_protection_config in lookup(
-        repository_config, "branch_protections", {}
-        ) : [
-        merge(
-          {
-            pattern       = branch_protection_pattern,
-            repository_id = repository_name
-          },
-          branch_protection_config
-        )
-      ]
-    ]
-  ])
-
-
-  topics = {
-    common       = [local.owner]
-    yandex_cloud = ["cloud", "yandex-cloud"]
-    terraform    = ["infrastructure", "terraform"]
-    nexus        = ["nexus", "sonatype-nexus", "nexus3", "sonatype-nexus3"]
-    go           = ["go", "golang"]
-    web          = ["javascript", "css", "html", "html5", "css3", "webapp"]
-    python       = ["python", "python3"]
-    vuejs        = ["vuejs", "vuejs3"]
-    abandoned    = ["abandoned"]
   }
 }
