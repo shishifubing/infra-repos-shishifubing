@@ -14,9 +14,13 @@ terraform {
 }
 
 locals {
-  owner      = "shishifubing-com"
+  name       = "shishifubing"
+  bio        = "事实浮冰"
+  owner      = "${local.name}-com"
   owner_url  = "https://github.com/${local.owner}"
-  owner_fqdn = "shishifubing.com"
+  owner_fqdn = "${local.name}.com"
+  email      = "97828377+shishifubing@users.noreply.github.com"
+  site       = "https://${local.owner_fqdn}"
 }
 
 provider "github" {

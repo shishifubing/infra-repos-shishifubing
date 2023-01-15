@@ -68,7 +68,7 @@ locals {
   topics = {
     common       = [local.owner]
     yandex_cloud = ["cloud", "yandex-cloud"]
-    terraform    = ["infrastructure", "terraform"]
+    terraform    = ["infrastructure", "terraform", "terraform-module"]
     nexus        = ["nexus", "sonatype-nexus", "nexus3", "sonatype-nexus3"]
     go           = ["go", "golang"]
     web          = ["javascript", "css", "html", "html5", "css3", "webapp"]
