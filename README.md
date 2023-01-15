@@ -26,6 +26,7 @@ terraform apply
 ## Mirror repositories
 
 > **Note**
+>
 > Pull mirroring is a premium Gitlab feature, to mirror repositories you need
 > to recreate all projects
 
@@ -75,27 +76,32 @@ terraform apply
 # Module documentation
 
 <!-- BEGIN_TF_DOCS -->
-
 ## Requirements
 
-| Name                                                            | Version |
-| --------------------------------------------------------------- | ------- |
-| <a name="requirement_github"></a> [github](#requirement_github) | 5.14.0  |
+| Name | Version |
+|------|---------|
+| <a name="requirement_github"></a> [github](#requirement\_github) | 5.14.0 |
+| <a name="requirement_gitlab"></a> [gitlab](#requirement\_gitlab) | 15.7.1 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_gitlab"></a> [gitlab](#provider\_gitlab) | 15.7.1 |
 
 ## Modules
 
-| Name                                                                                      | Source                      | Version |
-| ----------------------------------------------------------------------------------------- | --------------------------- | ------- |
-| <a name="module_branch_protections"></a> [branch_protections](#module_branch_protections) | ./modules/branch_protection | n/a     |
-| <a name="module_repositories"></a> [repositories](#module_repositories)                   | ./modules/repository        | n/a     |
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_branch_protections"></a> [branch\_protections](#module\_branch\_protections) | ./modules/branch_protection | n/a |
+| <a name="module_repositories"></a> [repositories](#module\_repositories) | ./modules/repository | n/a |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [gitlab_project.repository](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project) | resource |
+| [gitlab_group.group](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/data-sources/group) | data source |
 
 ## Inputs
 
@@ -103,6 +109,7 @@ No inputs.
 
 ## Outputs
 
-No outputs.
-
+| Name | Description |
+|------|-------------|
+| <a name="output_repositories"></a> [repositories](#output\_repositories) | created repositories |
 <!-- END_TF_DOCS -->
