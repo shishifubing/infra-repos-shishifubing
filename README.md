@@ -104,33 +104,32 @@ Processed 280230 bytes, 0.280 megabytes (SI)
 # Module documentation
 
 <!-- BEGIN_TF_DOCS -->
-
 ## Requirements
 
-| Name                                                            | Version |
-| --------------------------------------------------------------- | ------- |
-| <a name="requirement_github"></a> [github](#requirement_github) | 5.14.0  |
-| <a name="requirement_gitlab"></a> [gitlab](#requirement_gitlab) | 15.7.1  |
+| Name | Version |
+|------|---------|
+| <a name="requirement_github"></a> [github](#requirement\_github) | 5.14.0 |
+| <a name="requirement_gitlab"></a> [gitlab](#requirement\_gitlab) | 15.7.1 |
 
 ## Providers
 
-| Name                                                      | Version |
-| --------------------------------------------------------- | ------- |
-| <a name="provider_gitlab"></a> [gitlab](#provider_gitlab) | 15.7.1  |
+| Name | Version |
+|------|---------|
+| <a name="provider_gitlab"></a> [gitlab](#provider\_gitlab) | 15.7.1 |
 
 ## Modules
 
-| Name                                                                                      | Source                      | Version |
-| ----------------------------------------------------------------------------------------- | --------------------------- | ------- |
-| <a name="module_branch_protections"></a> [branch_protections](#module_branch_protections) | ./modules/branch_protection | n/a     |
-| <a name="module_repositories"></a> [repositories](#module_repositories)                   | ./modules/repository        | n/a     |
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_branch_protections"></a> [branch\_protections](#module\_branch\_protections) | ./modules/branch_protection | n/a |
+| <a name="module_repositories"></a> [repositories](#module\_repositories) | ./modules/repository | n/a |
 
 ## Resources
 
-| Name                                                                                                               | Type        |
-| ------------------------------------------------------------------------------------------------------------------ | ----------- |
-| [gitlab_project.repository](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project) | resource    |
-| [gitlab_group.group](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/data-sources/group)       | data source |
+| Name | Type |
+|------|------|
+| [gitlab_project.repository](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project) | resource |
+| [gitlab_group.group](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/data-sources/group) | data source |
 
 ## Inputs
 
@@ -138,8 +137,7 @@ No inputs.
 
 ## Outputs
 
-| Name                                                                    | Description          |
-| ----------------------------------------------------------------------- | -------------------- |
-| <a name="output_repositories"></a> [repositories](#output_repositories) | created repositories |
-
+| Name | Description |
+|------|-------------|
+| <a name="output_repositories"></a> [repositories](#output\_repositories) | created repositories |
 <!-- END_TF_DOCS -->
