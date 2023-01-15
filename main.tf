@@ -23,25 +23,20 @@ locals {
   # branch_protections defined in the configs
   branch_protections_list = flatten([
     for repository_name, repository_config in local.repositories : [
-      for branch_protection_pattern, branch_protection_config in lookup(
-        repository_config, "branch_protections", {}
-        ) : [
-        merge(
-          {
-            pattern       = branch_protection_pattern,
-            repository_id = repository_name
-          },
-          branch_protection_config
-        )
-      ]
+      for branch_protection_pattern, branch_protection_config in
+      lookup(repository_config, "branch_protections", {}) : merge(
+        {
+          pattern       = branch_protection_pattern,
+          repository_id = repository_name
+        },
+        branch_protection_config
+      )
     ]
   ])
 
-  # default branch_protection config
+  # default branch_protection config for the main branch
   branch_protections_main = {
-    main = {
-      enforce_admins = false
-    }
+    enforce_admins = false
   }
 
   # dictionary of topics to reuse
@@ -69,7 +64,9 @@ locals {
       topics = concat(local.topics.common, local.topics.terraform, [
 
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "job-ghaction-readme-scc-code-count" = {
@@ -83,7 +80,9 @@ locals {
       topics = concat(local.topics.common, [
         "github-action", "scc"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     ".github" = {
@@ -96,7 +95,9 @@ locals {
       topics = concat(local.topics.common, [
         "readme"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "infra-cloud-${local.owner_fqdn}" = {
@@ -110,7 +111,9 @@ locals {
         local.topics.common, local.topics.terraform, local.topics.yandex_cloud,
         []
       )
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "misc-personal-dotfiles" = {
@@ -123,7 +126,9 @@ locals {
       topics = concat(local.topics.common, [
         "vim", "bash", "firefox", "ansible", "vimrc", "firefox-css"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "${local.owner}.github.io" = {
@@ -137,10 +142,11 @@ locals {
         "github-io", "github-pages"
       ])
       pages = {
-        enabled = true
-        cname   = local.owner_fqdn
+        cname = local.owner_fqdn
       }
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "app-android-anki-chinese-flashcards-enricher" = {
@@ -153,7 +159,9 @@ locals {
       topics = concat(local.topics.common, [
         "app", "android", "kotlin"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "plugin-firefox-new-tab-bookmarks" = {
@@ -166,7 +174,9 @@ locals {
       topics = concat(local.topics.common, [
         "javascript", "firefox", "firefox-addon"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "app-desktop-useless-cpp-gui" = {
@@ -179,7 +189,9 @@ locals {
       topics = concat(local.topics.common, local.topics.abandoned, [
         "desktop-app", "gui", "qt", "cpp", "qt5"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "snippets-javascript-assignments" = {
@@ -189,8 +201,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "snippets-javascript-assignments"
       ])
-      topics             = concat(local.topics.web, local.topics.common)
-      branch_protections = local.branch_protections_main
+      topics = concat(local.topics.web, local.topics.common)
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "app-web-crawler-book-creator" = {
@@ -205,7 +219,9 @@ locals {
         local.topics.common, local.topics.python, local.topics.abandoned,
         local.topics.web, ["django", "web-scraping"]
       )
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "app-web-tianyi" = {
@@ -220,7 +236,9 @@ locals {
         local.topics.abandoned, local.topics.common,
         ["redis", "spa", "postgresql", "scss", "vuex-store"]
       )
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "app-cli-autoscroll" = {
@@ -233,7 +251,9 @@ locals {
       topics = concat(local.topics.python, local.topics.common, [
         "pyqt5", "cli-app"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "app-web-django-assignment" = {
@@ -246,7 +266,9 @@ locals {
       topics = concat(local.topics.web, local.topics.common, [
         "python", "bootstrap", "django", "ssr", "python3"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "snippets-golang-leetcode" = {
@@ -259,7 +281,9 @@ locals {
       topics = concat(local.topics.go, local.topics.common, [
         "leetcode", "leetcode-solutions"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
 
     "plugin-sonatype-nexus-security-check" = {
@@ -272,7 +296,9 @@ locals {
       topics = concat(local.topics.nexus, local.topics.common, [
         "plugin", "java", "maven", "apache-karaf", "sonatype-nexus-plugin"
       ])
-      branch_protections = local.branch_protections_main
+      branch_protections = {
+        "main" = local.branch_protections_main
+      }
     }
   }
 }
