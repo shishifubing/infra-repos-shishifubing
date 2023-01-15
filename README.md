@@ -30,6 +30,7 @@ terraform apply
 ## Mirror repositories
 
 > **Note**
+>
 > Pull mirroring is a premium Gitlab feature, to mirror repositories you need
 > to recreate all projects
 
@@ -75,6 +76,34 @@ terraform apply
 [terraform-action]: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
 [github_repository]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/repository
 [github_branch_protection]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/branch_protection
+
+<!-- BEGIN_SCC -->
+
+# SCC
+
+```
+───────────────────────────────────────────────────────────────────────────────
+Language                 Files     Lines   Blanks  Comments     Code Complexity
+───────────────────────────────────────────────────────────────────────────────
+Markdown                    12      3340     1228         0     2112          0
+Terraform                   11       642       51        29      562         33
+License                      5      1277      237         0     1040          0
+Shell                        4       117       15         6       96          3
+YAML                         2       191       36        22      133          0
+JSON                         1         1        0         0        1          0
+gitignore                    1        29        6        15        8          0
+───────────────────────────────────────────────────────────────────────────────
+Total                       36      5597     1573        72     3952         36
+───────────────────────────────────────────────────────────────────────────────
+Estimated Cost to Develop (organic) $114,354
+Estimated Schedule Effort (organic) 6.03 months
+Estimated People Required (organic) 1.68
+───────────────────────────────────────────────────────────────────────────────
+Processed 280230 bytes, 0.280 megabytes (SI)
+───────────────────────────────────────────────────────────────────────────────
+```
+
+<!-- END_SCC -->
 
 # Module documentation
 

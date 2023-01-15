@@ -12,7 +12,7 @@ resource "github_repository" "repository" {
   visibility                              = var.config.visibility
   is_template                             = var.config.is_template
   homepage_url                            = var.config.homepage_url
-  topics                                  = var.config.topics
+  topics                                  = toset(var.config.topics)
   ignore_vulnerability_alerts_during_read = var.config.ignore_vulnerability_alerts_during_read
   vulnerability_alerts                    = var.config.vulnerability_alerts
 
