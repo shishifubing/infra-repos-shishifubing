@@ -1,10 +1,14 @@
 # [`infra-repos-shishifubing-com`][repository-link]
 
-Terraform module that:
+This terraform module manages [shishifubing-com]
 
-- manages repositories in [shishifubing-com]
-- manages branch protection rules in [shishifubing-com]
-- mirrors all repositories in [shishifubing-com] to [Gitlab][shishifubing-com-gitlab]
+Features:
+
+- it manages repositories
+- it manages branch protection rules
+- it manages organization settings
+- it manages organization membershinp
+- it mirrors all repositories in [shishifubing-com] to [Gitlab][shishifubing-com-gitlab]
 
 # Usage
 
@@ -81,10 +85,14 @@ terraform apply
 | Name                                                            | Version |
 | --------------------------------------------------------------- | ------- |
 | <a name="requirement_github"></a> [github](#requirement_github) | 5.14.0  |
+| <a name="requirement_gitlab"></a> [gitlab](#requirement_gitlab) | 15.7.1  |
 
 ## Providers
 
-No providers.
+| Name                                                      | Version |
+| --------------------------------------------------------- | ------- |
+| <a name="provider_github"></a> [github](#provider_github) | 5.14.0  |
+| <a name="provider_gitlab"></a> [gitlab](#provider_gitlab) | 15.7.1  |
 
 ## Modules
 
@@ -95,7 +103,12 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name                                                                                                                                                 | Type        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| [github_membership.bot](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/membership)                                | resource    |
+| [github_organization_settings.organization](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/organization_settings) | resource    |
+| [gitlab_project.repository](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project)                                   | resource    |
+| [gitlab_group.group](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/data-sources/group)                                         | data source |
 
 ## Inputs
 
@@ -103,6 +116,9 @@ No inputs.
 
 ## Outputs
 
-No outputs.
+| Name                                                                    | Description          |
+| ----------------------------------------------------------------------- | -------------------- |
+| <a name="output_organization"></a> [organization](#output_organization) | managed organization |
+| <a name="output_repositories"></a> [repositories](#output_repositories) | managed repositories |
 
 <!-- END_TF_DOCS -->
