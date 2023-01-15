@@ -33,7 +33,7 @@ resource "gitlab_project" "repository" {
   ])
   import_url       = each.value.repository.http_clone_url
   namespace_id     = data.gitlab_group.group.group_id
-  topics           = each.value.repository.topics
+  topics           = toset(each.value.repository.topics)
   visibility_level = each.value.repository.visibility
 }
 
@@ -71,10 +71,14 @@ locals {
     terraform    = ["infrastructure", "terraform"]
     nexus        = ["nexus", "sonatype-nexus", "nexus3", "sonatype-nexus3"]
     go           = ["go", "golang"]
-    web          = ["javascript", "css", "html", "html5", "css3", "webapp"]
+    web          = ["javascript", "css", "html", "html5", "css3"]
+    webapp       = ["app", "webapp"]
     python       = ["python", "python3"]
     vuejs        = ["vuejs", "vuejs3"]
-    abandoned    = ["abandoned"]
+    abandoned    = ["abandoned", "abandoned-project"]
+    finished     = ["finished", "finished-project"]
+    ghaction     = ["action", "actions", "github-action", "github-actions"]
+    readme       = ["readme", "readme-profile"]
   }
 
   # main repository config
@@ -86,9 +90,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "infra-repos-${local.owner}"
       ])
-      topics = concat(local.topics.common, local.topics.terraform, [
-
-      ])
+      topics = concat(
+        local.topics.common, local.topics.terraform,
+        []
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -96,15 +101,16 @@ locals {
 
     "job-ghaction-readme-scc-code-count" = {
       description = join(" ", [
-        "Github action to add and update code count in the README.md of ",
+        "Github action to add and update code count in the README.md of",
         "a project"
       ])
       homepage_url = join("/", [
         local.owner_url, "job-ghaction-readme-scc-code-count"
       ])
-      topics = concat(local.topics.common, [
-        "github-action", "scc"
-      ])
+      topics = concat(
+        local.topics.common, local.topics.ghaction,
+        ["scc"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -117,9 +123,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, ".github"
       ])
-      topics = concat(local.topics.common, [
-        "readme"
-      ])
+      topics = concat(
+        local.topics.common, local.topics.readme,
+        []
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -148,10 +155,11 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "misc-personal-dotfiles"
       ])
-      topics = concat(local.topics.common, [
-        "dotfiles",
-        "vim", "bash", "firefox", "ansible", "vimrc", "firefox-css"
-      ])
+      topics = concat(
+        local.topics.common,
+        ["dotfiles", "vim", "bash", "firefox", "ansible", "vimrc",
+        "firefox-css"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -164,9 +172,10 @@ locals {
       homepage_url = join("/", [
         "https://${local.owner_fqdn}"
       ])
-      topics = concat(local.topics.common, [
-        "github-io", "github-pages"
-      ])
+      topics = concat(
+        local.topics.common,
+        ["github-io", "github-pages"]
+      )
       pages = {
         cname = local.owner_fqdn
       }
@@ -182,9 +191,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "app-android-anki-chinese-flashcards-enricher"
       ])
-      topics = concat(local.topics.common, [
-        "app", "android", "kotlin"
-      ])
+      topics = concat(
+        local.topics.common,
+        ["app", "android", "kotlin"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -192,14 +202,16 @@ locals {
 
     "plugin-firefox-new-tab-bookmarks" = {
       description = join(" ", [
-        "Simple plugin for Firefox"
+        "Simple plugin for Firefox, boring",
+        "[abandoned]"
       ])
       homepage_url = join("/", [
         local.owner_url, "plugin-firefox-new-tab-bookmarks"
       ])
-      topics = concat(local.topics.common, [
-        "javascript", "firefox", "firefox-addon"
-      ])
+      topics = concat(
+        local.topics.common, local.topics.web, local.topics.abandoned,
+        ["javascript", "firefox", "firefox-addon"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -207,14 +219,16 @@ locals {
 
     "app-desktop-useless-cpp-gui" = {
       description = join(" ", [
-        "Desktop GUI written using C++ and Qt, it does absolutely nothing"
+        "Desktop GUI written using C++ and Qt, it does absolutely nothing",
+        "[abandoned]"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-desktop-useless-cpp-gui"
       ])
-      topics = concat(local.topics.common, local.topics.abandoned, [
-        "desktop-app", "gui", "qt", "cpp", "qt5"
-      ])
+      topics = concat(
+        local.topics.common, local.topics.abandoned,
+        ["desktop-app", "gui", "qt", "cpp", "qt5"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -222,12 +236,16 @@ locals {
 
     "snippets-javascript-assignments" = {
       description = join(" ", [
-        "Javascript assignments"
+        "Javascript assignments, boring",
+        "[finished]"
       ])
       homepage_url = join("/", [
         local.owner_url, "snippets-javascript-assignments"
       ])
-      topics = concat(local.topics.web, local.topics.common)
+      topics = concat(
+        local.topics.web, local.topics.common,
+        []
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -236,14 +254,16 @@ locals {
     "app-web-crawler-book-creator" = {
       description = join(" ", [
         "Web scraper I was building in java a long time ago and ",
-        "started remaking using Django"
+        "started remaking using Django",
+        "[abandoned]"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-web-crawler-book-creator"
       ])
       topics = concat(
         local.topics.common, local.topics.python, local.topics.abandoned,
-        local.topics.web, ["django", "web-scraping"]
+        local.topics.web, local.topics.webapp,
+        ["django", "web-scraping"]
       )
       branch_protections = {
         "main" = local.branch_protections_main
@@ -252,14 +272,15 @@ locals {
 
     "app-web-tianyi" = {
       description = join(" ", [
-        "SPA CI/CD app"
+        "SPA CI/CD app",
+        "[abandoned]"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-web-tianyi"
       ])
       topics = concat(
-        local.topics.go, local.topics.web, local.topics.vuejs,
-        local.topics.abandoned, local.topics.common,
+        local.topics.go, local.topics.web, local.topics.webapp,
+        local.topics.vuejs, local.topics.abandoned, local.topics.common,
         ["redis", "spa", "postgresql", "scss", "vuex-store"]
       )
       branch_protections = {
@@ -269,14 +290,16 @@ locals {
 
     "app-cli-autoscroll" = {
       description = join(" ", [
-        "Cross-platform CLI app enabling autoscroll"
+        "Cross-platform CLI app enabling autoscroll",
+        "[finished]"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-cli-autoscroll"
       ])
-      topics = concat(local.topics.python, local.topics.common, [
-        "pyqt5", "cli-app"
-      ])
+      topics = concat(
+        local.topics.python, local.topics.common, local.topics.finished,
+        ["pyqt5", "cli-app"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -284,14 +307,17 @@ locals {
 
     "app-web-django-assignment" = {
       description = join(" ", [
-        "SSR web app"
+        "SSR web app",
+        "[finished]"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-web-django-assignment"
       ])
-      topics = concat(local.topics.web, local.topics.common, [
-        "python", "bootstrap", "django", "ssr", "python3"
-      ])
+      topics = concat(
+        local.topics.web, local.topics.webapp, local.topics.common,
+        local.topics.finished,
+        ["python", "bootstrap", "django", "ssr", "python3"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -304,9 +330,10 @@ locals {
       homepage_url = join("/", [
         local.owner_url, "snippets-golang-leetcode"
       ])
-      topics = concat(local.topics.go, local.topics.common, [
-        "leetcode", "leetcode-solutions"
-      ])
+      topics = concat(
+        local.topics.go, local.topics.common,
+        ["leetcode", "leetcode-solutions"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
@@ -314,14 +341,16 @@ locals {
 
     "plugin-sonatype-nexus-security-check" = {
       description = join(" ", [
-        "Security plugin for Sonatype Nexus 3"
+        "Security plugin for Sonatype Nexus 3",
+        "[finished]"
       ])
       homepage_url = join("/", [
         local.owner_url, "plugin-sonatype-nexus-security-check"
       ])
-      topics = concat(local.topics.nexus, local.topics.common, [
-        "plugin", "java", "maven", "apache-karaf", "sonatype-nexus-plugin"
-      ])
+      topics = concat(
+        local.topics.nexus, local.topics.common, local.topics.finished,
+        ["plugin", "java", "maven", "apache-karaf", "sonatype-nexus-plugin"]
+      )
       branch_protections = {
         "main" = local.branch_protections_main
       }
