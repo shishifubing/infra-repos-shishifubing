@@ -51,6 +51,14 @@ gitlab_repos=$(
 )
 read -ra gitlab_repos <<<"${gitlab_repos}"
 
+terraform import                \
+    "github_membership.bot"     \
+    "${owner}:shishifubing-bot"
+
+terraform import \
+    "github_organization_settings.organization"
+    "shishifubing-com"
+
 for repo in "${repos[@]}"; do
     terraform import                       \
         "$(resource_repository "${repo}")" \
