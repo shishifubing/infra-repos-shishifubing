@@ -29,16 +29,12 @@ resource "gitlab_project" "repository" {
   ) : each.value.repository.name
   description = join(" ", [
     each.value.repository.description,
-    "- mirror of ${each.value.repository.html_url}"
+    "[mirror of ${each.value.repository.html_url}]"
   ])
-  mirror                              = true
-  mirror_overwrites_diverged_branches = true
-  mirror_trigger_builds               = false
-  only_mirror_protected_branches      = false
-  import_url                          = each.value.repository.http_clone_url
-  namespace_id                        = data.gitlab_group.group.group_id
-  topics                              = each.value.repository.topics
-  visibility_level                    = each.value.repository.visibility
+  import_url       = each.value.repository.http_clone_url
+  namespace_id     = data.gitlab_group.group.group_id
+  topics           = each.value.repository.topics
+  visibility_level = each.value.repository.visibility
 }
 
 locals {

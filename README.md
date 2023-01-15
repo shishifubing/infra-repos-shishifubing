@@ -26,11 +26,11 @@ terraform apply
 ## Mirror repositories
 
 > **Note**
-> Pull mirroring is a premium feature, so to mirror repositories you need to
-> recreate them
+> Pull mirroring is a premium Gitlab feature, to mirror repositories you need
+> to recreate all projects
 
 ```bash
-terraform apply -replace -target=gitlab_project.repository
+./mirror.sh
 ```
 
 ## Regenerate module documentation
