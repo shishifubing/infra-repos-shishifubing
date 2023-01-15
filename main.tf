@@ -149,6 +149,7 @@ locals {
         local.owner_url, "misc-personal-dotfiles"
       ])
       topics = concat(local.topics.common, [
+        "dotfiles",
         "vim", "bash", "firefox", "ansible", "vimrc", "firefox-css"
       ])
       branch_protections = {
