@@ -60,7 +60,8 @@ locals {
 
   # default branch_protection config for the main branch
   branch_protections_main = {
-    enforce_admins = false
+    enforce_admins                  = true
+    required_approving_review_count = 0
   }
 
   # dictionary of topics to reuse
