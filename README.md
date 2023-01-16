@@ -1,6 +1,7 @@
 # [`infra-repos-shishifubing-com`][repo]
 
 <!-- shields -->
+
 [![shield-in-progress]][repo]
 
 This terraform module manages [shishifubing-com]
