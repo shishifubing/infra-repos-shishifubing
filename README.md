@@ -1,4 +1,4 @@
-# [`infra-repos-shishifubing-com`][repository-link]
+# [`infra-repos-shishifubing-com`][repo]
 
 <!-- shields -->
 [![shield-in-progress]][repo]
@@ -73,7 +73,7 @@ terraform apply
 
 [shishifubing-com]: https://github.com/shishifubing-com
 [shishifubing-com-gitlab]: https://gitlab.com/shishifubing-com
-[repository-link]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
+[repo]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
 [terraform-provider]: https://registry.tfpla.net/providers/integrations/github/latest
 [setup]: https://github.com/shishifubing-com/infra-cloud-shishifubing.com#setup-terraform-backend-and-local-environment
 [terraform-action]: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
