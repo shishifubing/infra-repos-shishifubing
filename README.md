@@ -11,7 +11,7 @@ Features:
 - it manages repositories
 - it manages branch protection rules
 - it manages organization settings
-- it manages organization membership
+- it manages organization membershinp
 - it mirrors all repositories in [shishifubing-com] to [Gitlab][shishifubing-com-gitlab]
 
 # Usage
