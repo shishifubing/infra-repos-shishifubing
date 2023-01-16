@@ -1,5 +1,8 @@
 # [`infra-repos-shishifubing-com`][repository-link]
 
+<!-- shields -->
+[![shield-in-progress]][repo]
+
 This terraform module manages [shishifubing-com]
 
 Features:
@@ -76,6 +79,7 @@ terraform apply
 [terraform-action]: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
 [github_repository]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/repository
 [github_branch_protection]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/branch_protection
+[shield-in-progress]: https://img.shields.io/badge/status-in--progress-success?style=for-the-badge
 
 <!-- BEGIN_SCC -->
 
