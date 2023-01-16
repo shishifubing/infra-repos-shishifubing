@@ -1,4 +1,8 @@
-# [`infra-repos-shishifubing-com`][repository-link]
+# [`infra-repos-shishifubing-com`][repo]
+
+<!-- shields -->
+
+[![shield-in-progress]][repo]
 
 This terraform module manages [shishifubing-com]
 
@@ -7,7 +11,7 @@ Features:
 - it manages repositories
 - it manages branch protection rules
 - it manages organization settings
-- it manages organization membershinp
+- it manages organization membership
 - it mirrors all repositories in [shishifubing-com] to [Gitlab][shishifubing-com-gitlab]
 
 # Usage
@@ -70,12 +74,13 @@ terraform apply
 
 [shishifubing-com]: https://github.com/shishifubing-com
 [shishifubing-com-gitlab]: https://gitlab.com/shishifubing-com
-[repository-link]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
+[repo]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
 [terraform-provider]: https://registry.tfpla.net/providers/integrations/github/latest
 [setup]: https://github.com/shishifubing-com/infra-cloud-shishifubing.com#setup-terraform-backend-and-local-environment
 [terraform-action]: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
 [github_repository]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/repository
 [github_branch_protection]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/branch_protection
+[shield-in-progress]: https://img.shields.io/badge/status-in--progress-success?style=for-the-badge
 
 <!-- BEGIN_SCC -->
 

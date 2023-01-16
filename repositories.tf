@@ -294,7 +294,7 @@ locals {
         "[finished]"
       ])
       homepage_url = join("/", [
-        local.owner_url, "app-cli-autoscroll"
+        "https://pypi.org/project", "autoscroll"
       ])
       topics = concat(
         local.topics.python, local.topics.common, local.topics.finished,
