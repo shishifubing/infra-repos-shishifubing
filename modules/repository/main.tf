@@ -41,7 +41,7 @@ resource "github_repository" "repository" {
 
   dynamic "template" {
     // if repository config has a template definition, create the block
-    for_each = var.config.template == null ? {} : { _ = var.config.template }
+    for_each = var.config.template[*]
     content {
       include_all_branches = template.value.content.include_all_branches
       owner                = template.value.content.owner
@@ -51,7 +51,7 @@ resource "github_repository" "repository" {
 
   dynamic "pages" {
     // if repository config has a definition of pages, create a block
-    for_each = var.config.pages == null ? {} : { _ = var.config.pages }
+    for_each = var.config.pages[*]
     content {
       cname = pages.value.cname
       source {
@@ -62,7 +62,7 @@ resource "github_repository" "repository" {
   }
 
   dynamic "security_and_analysis" {
-    for_each = var.config.security_and_analysis == null ? {} : { _ = var.config.security_and_analysis }
+    for_each = var.config.security_and_analysis[*]
     content {
       advanced_security {
         status = var.config.security_and_analysis.advanced_security.status
