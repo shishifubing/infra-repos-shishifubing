@@ -114,23 +114,6 @@ locals {
       }
     }
 
-    "job-ghaction-readme-scc-code-count" = {
-      description = join(" ", [
-        "Github action to add and update code count in the README.md of",
-        "a project"
-      ])
-      homepage_url = join("/", [
-        local.owner_url, "job-ghaction-readme-scc-code-count"
-      ])
-      topics = concat(
-        local.topics.common, local.topics.ghaction,
-        ["scc"]
-      )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
-    }
-
     ".github" = {
       description = join(" ", [
         "Organization readme"
@@ -217,7 +200,7 @@ locals {
 
     "plugin-firefox-new-tab-bookmarks" = {
       description = join(" ", [
-        "Simple plugin for Firefox, boring",
+        "Plugin for Firefox, boring",
         "[abandoned]"
       ])
       homepage_url = join("/", [
@@ -252,7 +235,6 @@ locals {
     "snippets-javascript-assignments" = {
       description = join(" ", [
         "Javascript assignments, boring",
-        "[finished]"
       ])
       homepage_url = join("/", [
         local.owner_url, "snippets-javascript-assignments"
