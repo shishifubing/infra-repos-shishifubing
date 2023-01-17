@@ -4,6 +4,7 @@ resource "github_membership" "bot" {
 }
 
 resource "github_organization_settings" "organization" {
+  billing_email                                                = local.email
   company                                                      = local.name
   blog                                                         = local.site
   location                                                     = "Russian Federation"
