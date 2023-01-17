@@ -79,10 +79,25 @@ locals {
     finished     = ["finished", "finished-project"]
     ghaction     = ["action", "actions", "github-action", "github-actions"]
     readme       = ["readme", "readme-profile"]
+    shields      = ["shieldsio", "shields-io"]
+    template     = ["template", "template-project", "template-repository"]
   }
 
   # main repository config
   repositories = {
+    "template-personal-default" = {
+      description = join(" ", [
+        "Template for my repositories"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "template-personal-default"
+      ])
+      topics = concat(
+        local.topics.common, local.topics.shields, local.topics.template,
+        []
+      )
+    }
+
     "infra-repos-${local.owner}" = {
       description = join(" ", [
         "Terraform module managing repositories in ${local.owner_url}"
