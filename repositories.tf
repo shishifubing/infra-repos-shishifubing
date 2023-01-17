@@ -199,6 +199,7 @@ locals {
     }
 
     "plugin-firefox-new-tab-bookmarks" = {
+      archived = true
       description = join(" ", [
         "Plugin for Firefox, boring",
         "[abandoned]"
@@ -216,6 +217,7 @@ locals {
     }
 
     "app-desktop-useless-cpp-gui" = {
+      archived = true
       description = join(" ", [
         "Desktop GUI written using C++ and Qt, it does absolutely nothing",
         "[abandoned]"
@@ -233,6 +235,7 @@ locals {
     }
 
     "snippets-javascript-assignments" = {
+      archived = true
       description = join(" ", [
         "Javascript assignments, boring",
       ])
@@ -249,6 +252,7 @@ locals {
     }
 
     "app-web-crawler-book-creator" = {
+      archived = true
       description = join(" ", [
         "Web scraper I was building in java a long time ago and ",
         "started remaking using Django",
@@ -268,6 +272,7 @@ locals {
     }
 
     "app-web-tianyi" = {
+      archived = true
       description = join(" ", [
         "SPA CI/CD app",
         "[abandoned]"
