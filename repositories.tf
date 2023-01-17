@@ -308,6 +308,7 @@ locals {
     }
 
     "app-web-django-assignment" = {
+      archived = true
       description = join(" ", [
         "SSR web app",
         "[finished]"
