@@ -5,6 +5,14 @@ output "repositories" {
   sensitive = true
 }
 
+output "replace_repositories" {
+  description = "terraform apply with mirroring to Gitlab"
+  value = join(" ", [
+    for name, _ in module.repositories :
+    "-replace=gitlab_project.repository[\"${name}\"]"
+  ])
+}
+
 output "organization" {
   description = "managed organization"
   value       = github_organization_settings.organization
