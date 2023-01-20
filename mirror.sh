@@ -10,4 +10,4 @@ replace=$(
     ' <<<"${repos}"
 )
 read -ra replace <<<"${replace}"
-terraform apply "${replace[@]}"
+terraform apply "${replace[@]}" "${@}"
