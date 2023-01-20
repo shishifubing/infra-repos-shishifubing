@@ -25,21 +25,15 @@ jobs:
 
       - name: Setup .terraformrc
         run: |
-          echo "
+          echo '
             provider_installation {
               network_mirror {
                 url = "https://terraform-mirror.yandexcloud.net/"
-                include = [
-                  "registry.terraform.io/*/*"
-                ]
+                include = ["registry.terraform.io/*/*"]
               }
-              direct {
-                exclude = [
-                  "registry.terraform.io/*/*"
-                ]
-              }
+              direct { exclude = ["registry.terraform.io/*/*"] }
             }
-          " >"${HOME}/.terraformrc"
+          ' >"${HOME}/.terraformrc"
 
       - name: Terraform Format
         id: fmt
