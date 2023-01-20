@@ -22,6 +22,14 @@ Features:
 >
 > 404 errors probably mean invalid token, check it
 
+## CI
+
+- Commit
+- Make PR
+- Merge
+
+## Manual
+
 ```bash
 # export auth variables
 . ./variables.sh
@@ -35,6 +43,8 @@ terraform apply
 >
 > Pull mirroring is a premium Gitlab feature, to mirror repositories you need
 > to recreate all projects
+>
+> Repositories are mirrored on every push to main
 
 ```bash
 ./mirror.sh
