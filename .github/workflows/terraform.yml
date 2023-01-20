@@ -23,8 +23,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Get .terraformrc
-        run: curl -L --output "${HOME}/.terraformrc" "${TERRAFORMRC_URL}"
+      - name: Setup .terraformrc
+        run: |
+          echo "
+            provider_installation {
+              network_mirror {
+                url = "https://terraform-mirror.yandexcloud.net/"
+                include = ["registry.terraform.io/*/*"]
+              }
+              direct { exclude = ["registry.terraform.io/*/*"] }
+            }
+          " >"${HOME}/.terraformrc"
 
       - name: Terraform Format
         id: fmt
