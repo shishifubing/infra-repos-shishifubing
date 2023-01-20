@@ -77,7 +77,7 @@ locals {
           required_approving_review_count = 0
           required_status_checks = {
             terraform = {
-              contexts = ["terraform/main"]
+              contexts = ["terraform / main (pull_request)"]
               strict   = true
             }
           }

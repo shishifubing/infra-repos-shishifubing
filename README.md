@@ -37,18 +37,12 @@ Features:
 terraform apply
 ```
 
-## Mirror repositories
+## Mirroring
 
 > **Note**
 >
-> Pull mirroring is a premium Gitlab feature, to mirror repositories you need
-> to recreate all projects
->
-> Repositories are mirrored on every push to main
-
-```bash
-./mirror.sh
-```
+> Pull mirroring is a premium Gitlab feature,
+> so all Gitlab repositories are recreated on each `terraform apply`
 
 ## Regenerate module documentation
 
