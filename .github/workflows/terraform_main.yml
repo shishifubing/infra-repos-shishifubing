@@ -53,11 +53,6 @@ jobs:
         run: terraform plan -no-color -input=false
         continue-on-error: true
 
-      - name: get repository names
-        id: repository_names
-        run: terraform output -raw replace_repositories
-        continue-on-error: true
-
       - name: pr comment
         uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
@@ -94,4 +89,4 @@ jobs:
 
       - name: terraform apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false ${{ steps.plan.outputs.stdout }}
+        run: terraform apply -auto-approve -input=false
