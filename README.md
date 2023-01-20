@@ -1,6 +1,6 @@
 # [`infra-repos-shishifubing-com`][repo]
 
-[![Terraform][terraform-worklow-shield]][terraform-workflow-url]
+[![Terraform][terraform-workflow-shield]][terraform-workflow-url]
 
 This terraform module manages [shishifubing-com]
 
