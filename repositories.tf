@@ -68,7 +68,7 @@ locals {
   topics = {
     common       = [local.owner]
     yandex_cloud = ["cloud", "yandex-cloud"]
-    terraform    = ["infrastructure", "terraform", "terraform-module"]
+    terraform    = ["infrastructure", "terraform", "terraform-module", "infrastructure-as-code"]
     nexus        = ["nexus", "sonatype-nexus", "nexus3", "sonatype-nexus3"]
     go           = ["go", "golang"]
     web          = ["javascript", "css", "html", "html5", "css3"]
@@ -81,6 +81,7 @@ locals {
     readme       = ["readme", "readme-profile"]
     shields      = ["shieldsio", "shields-io"]
     template     = ["template", "template-project", "template-repository"]
+    packer       = ["packer"]
   }
 
   # main repository config
@@ -139,7 +140,8 @@ locals {
       ])
       topics = concat(
         local.topics.common, local.topics.terraform, local.topics.yandex_cloud,
-        []
+        local.topics.packer,
+        ["cloud-init"]
       )
       branch_protections = {
         "main" = local.branch_protections_main
