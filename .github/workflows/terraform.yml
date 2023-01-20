@@ -14,7 +14,7 @@ jobs:
       image: hashicorp/terraform:1.3.7
     env:
       TERRAFORMRC_URL: https://github.com/shishifubing-com/misc-personal-dotfiles/raw/main/configs/.terraformrc.hcl
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_REPO }}
       AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_TOKEN_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_TOKEN_KEY}}
       GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
@@ -29,9 +29,15 @@ jobs:
             provider_installation {
               network_mirror {
                 url = "https://terraform-mirror.yandexcloud.net/"
-                include = ["registry.terraform.io/*/*"]
+                include = [
+                  "registry.terraform.io/*/*"
+                ]
               }
-              direct { exclude = ["registry.terraform.io/*/*"] }
+              direct {
+                exclude = [
+                  "registry.terraform.io/*/*"
+                ]
+              }
             }
           " >"${HOME}/.terraformrc"
 
