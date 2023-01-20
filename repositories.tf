@@ -72,16 +72,7 @@ locals {
         []
       )
       branch_protections = {
-        "main" = {
-          enforce_admins                  = true
-          required_approving_review_count = 0
-          required_status_checks = {
-            terraform = {
-              contexts = ["terraform/main"]
-              strict   = true
-            }
-          }
-        }
+        "main" = local.branch_protections_main
       }
     }
 

@@ -20,8 +20,20 @@ data "gitlab_group" "group" {
   full_path = local.owner
 }
 
+resource "random_uuid" "force_recreation" {
+  keepers = { timestamp = timestamp() }
+}
+
 resource "gitlab_project" "repository" {
   for_each = module.repositories
+
+  # replace the repository every time
+  # it is more convenient than running some bash script every time
+  lifecycle {
+    replace_triggered_by = [
+      random_uuid.force_recreation
+    ]
+  }
 
   # gitlab repository names cannot start with a special character
   name = substr(each.value.repository.name, 0, 1) == "." ? format(
