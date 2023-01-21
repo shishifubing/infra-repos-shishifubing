@@ -35,9 +35,7 @@ resource "gitlab_project" "repository" {
       time_rotating.day
     ]
     # ignore all changes: modifying gitlab repositories is pointless
-    ignore_changes = [
-      "all"
-    ]
+    ignore_changes = all
   }
 
   # gitlab repository names cannot start with a special character
