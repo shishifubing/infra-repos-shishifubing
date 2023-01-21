@@ -8,7 +8,7 @@ on:
 
 jobs:
   call:
-    uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@feature/add-terraform-workflow
+    uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@main
     secrets:
       token_github: ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
       token_gitlab: ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
