@@ -11,7 +11,7 @@ jobs:
     uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@feature/add-terraform-workflow
     secrets:
       env: |
-        {GITHUB_TOKEN}={ ${{ secrets.TERRAFORM_TOKEN_GITHUB }} }
-        {AWS_ACCESS_KEY_ID}={ ${{ secrets.TERRAFORM_BUCKET_ID }} }
-        {AWS_SECRET_ACCESS_KEY}={ ${{ secrets.TERRAFORM_BUCKET_KEY}} }
-        {GITLAB_TOKEN}={ ${{ secrets.TERRAFORM_TOKEN_GITLAB }} }
+        {GITHUB_TOKEN}={${{ secrets.TERRAFORM_TOKEN_GITHUB }}}
+        {AWS_ACCESS_KEY_ID}={${{ secrets.TERRAFORM_BUCKET_ID }}}
+        {AWS_SECRET_ACCESS_KEY}={${{ secrets.TERRAFORM_BUCKET_KEY}}}
+        {GITLAB_TOKEN}={${{ secrets.TERRAFORM_TOKEN_GITLAB }}}
