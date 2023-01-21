@@ -28,12 +28,14 @@ resource "time_rotating" "day" {
 resource "gitlab_project" "repository" {
   for_each = module.repositories
 
-  # reimport the repository once a day
-  # it is more convenient than running some bash script every time
   lifecycle {
+    # reimport the repository once a day
+    # it is more convenient than running some bash script every time
     replace_triggered_by = [
       time_rotating.day
     ]
+    # ignore all changes: modifying gitlab repositories is pointless
+    ignore_changes = all
   }
 
   # gitlab repository names cannot start with a special character
