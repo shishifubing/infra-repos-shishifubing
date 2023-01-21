@@ -42,8 +42,7 @@ terraform apply
 > **Note**
 >
 > Pull mirroring is a premium Gitlab feature,
-> so all Gitlab repositories are destroyed and then imported once every day to
-> `mirror` them
+> so all Gitlab repositories are destroyed and then imported once every day to "_mirror_" them
 
 ## Regenerate module documentation
 
