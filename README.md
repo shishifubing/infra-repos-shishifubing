@@ -71,7 +71,7 @@ terraform apply
 
 <!-- shield links -->
 
-[terraform-workflow-shield]: https://img.shields.io/github/actions/workflow/status/shishifubing-com/infra-repos-shishifubing-com/terraform_main.yml?label=Terraform&style=for-the-badge
+[terraform-workflow-shield]: https://img.shields.io/github/actions/workflow/status/shishifubing-com/infra-repos-shishifubing-com/terraform.yml?label=Terraform&style=for-the-badge
 
 <!-- external links -->
 
