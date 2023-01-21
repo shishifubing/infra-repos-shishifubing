@@ -1,0 +1,16 @@
+name: "terraform"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  call:
+    uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@feature/add-terraform-workflow
+    secrets:
+      token_github: ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
+      token_gitlab: ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
+      aws_key_id: ${{ secrets.TERRAFORM_BUCKET_ID }}
+      aws_key: ${{ secrets.TERRAFORM_BUCKET_KEY }}

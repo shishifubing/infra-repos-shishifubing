@@ -62,7 +62,7 @@ locals {
 
   # main repository config
   repositories_initial = {
-    "ci-actions-${local.owner}" = {
+    "ci-actions-common" = {
       description = join(" ", [
         "Github actions for ${local.owner} repositories"
       ])
