@@ -2,23 +2,21 @@
 
 [![terraform][terraform-workflow-shield]][terraform-workflow-url]
 
-This terraform module manages [shishifubing-com]
+This terraform module manages [shishifubing-com]:
 
-Features:
-
-- it manages repositories
-- it manages branch protection rules
-- it manages organization settings
-- it manages organization membershinp
-- it mirrors all repositories in [shishifubing-com] to [Gitlab][shishifubing-com-gitlab]
+- It manages repositories
+- It manages branch protection rules
+- It manages organization settings
+- It manages organization membership
+- It mirrors all repositories in [shishifubing-com] to [Gitlab][shishifubing-com-gitlab]
 
 # Usage
 
 > **Note**
 >
-> GitHub's servers are "eventually consistent", not "immediately consistent"
+> GitHub's servers are "eventually consistent", not "immediately consistent",
 >
-> If you encounter errors (especially code 422), retry the operation
+> if you encounter errors (especially code 422), retry the operation
 >
 > 404 errors probably mean invalid token, check it
 
@@ -42,7 +40,8 @@ terraform apply
 > **Note**
 >
 > Pull mirroring is a premium Gitlab feature,
-> so all Gitlab repositories are destroyed and then imported once every day to "_mirror_" them
+> so all Gitlab repositories are destroyed and then imported once every day to
+> "_mirror_" them
 
 ## Regenerate module documentation
 
@@ -58,9 +57,7 @@ terraform-docs markdown table --recursive --output-file README.md .
 # export auth variables
 . ./variables.sh
 # initialize the backend
-terraform init -reconfigure -backend-config="./main.s3.tfbackend"
-# clean the state (if you need to)
-./clean.sh
+terraform init -reconfigure -backend-config="main.s3.tfbackend"
 # import existing repositories (if you need to)
 ./import.sh
 # update the infrastructure
@@ -82,7 +79,7 @@ terraform apply
 [shishifubing-com-gitlab]: https://gitlab.com/shishifubing-com
 [repo]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
 [terraform-provider]: https://registry.tfpla.net/providers/integrations/github/latest
-[setup]: https://github.com/shishifubing-com/infra-cloud-shishifubing.com#setup-terraform-backend-and-local-environment
+[setup]: https://github.com/shishifubing-com/infra-cloud-shishifubing.com/tree/main/cloud/yandex#setup-terraform-backend-and-local-environment
 [terraform-action]: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
 [github_repository]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/repository
 [github_branch_protection]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/branch_protection
