@@ -8,5 +8,5 @@ on:
 
 jobs:
   terraform:
-    uses: shishifubing-com/ci-actions-shishifubing-com/common/terraform.yml@feature/add-terraform-workflow
+    uses: shishifubing-com/ci-actions-shishifubing-com/.github/workflows/common/terraform.yml@feature/add-terraform-workflow
     secrets: inherit
