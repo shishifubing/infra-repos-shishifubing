@@ -7,6 +7,12 @@ on:
   pull_request:
 
 jobs:
-  terraform:
-    uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@feature/add-terraform-workflow
-    secrets: inherit
+  main:
+    env:
+      GITHUB_TOKEN: ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_BUCKET_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_BUCKET_KEY}}
+      GITLAB_TOKEN: ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@feature/add-terraform-workflow
