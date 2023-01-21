@@ -9,18 +9,19 @@ provider "registry.terraform.io/gitlabhq/gitlab" {
   ]
 }
 
-provider "registry.terraform.io/hashicorp/null" {
-  version = "3.2.1"
-  hashes = [
-    "h1:FbGfc+muBsC17Ohy5g806iuI1hQc4SIexpYCrQHQd8w=",
-  ]
-}
-
 provider "registry.terraform.io/hashicorp/random" {
   version     = "3.4.3"
   constraints = "3.4.3"
   hashes = [
     "h1:xZGZf18JjMS06pFa4NErzANI98qi59SEcBsOcS2P2yQ=",
+  ]
+}
+
+provider "registry.terraform.io/hashicorp/time" {
+  version     = "0.9.1"
+  constraints = "0.9.1"
+  hashes = [
+    "h1:NUv/YtEytDQncBQ2mTxnUZEy/rmDlPYmE9h2iokR0vk=",
   ]
 }
 

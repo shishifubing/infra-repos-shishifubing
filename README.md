@@ -1,6 +1,6 @@
 # [`infra-repos-shishifubing-com`][repo]
 
-[![Terraform][terraform-workflow-shield]][terraform-workflow-url]
+[![terraform][terraform-workflow-shield]][terraform-workflow-url]
 
 This terraform module manages [shishifubing-com]
 
@@ -42,7 +42,8 @@ terraform apply
 > **Note**
 >
 > Pull mirroring is a premium Gitlab feature,
-> so all Gitlab repositories are recreated on each `terraform apply`
+> so all Gitlab repositories are destroyed and then imported once every day to
+> `mirror` them
 
 ## Regenerate module documentation
 
@@ -86,7 +87,7 @@ terraform apply
 [terraform-action]: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
 [github_repository]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/repository
 [github_branch_protection]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/branch_protection
-[terraform-workflow-url]: https://github.com/shishifubing-com/infra-repos-shishifubing-com/actions/workflows/terraform.yml
+[terraform-workflow-url]: https://github.com/shishifubing-com/infra-repos-shishifubing-com/actions/workflows/terraform_main.yml
 
 # Module documentation
 

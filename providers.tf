@@ -10,9 +10,9 @@ terraform {
       source  = "gitlabhq/gitlab"
       version = "15.7.1"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.4.3"
+    time = {
+      source  = "hashicorp/time"
+      version = "0.9.1"
     }
   }
 }

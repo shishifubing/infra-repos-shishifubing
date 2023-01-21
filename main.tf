@@ -20,18 +20,19 @@ data "gitlab_group" "group" {
   full_path = local.owner
 }
 
-resource "random_uuid" "force_recreation" {
-  keepers = { timestamp = timestamp() }
+# forces replacement once a day
+resource "time_rotating" "day" {
+  rotation_days = 1
 }
 
 resource "gitlab_project" "repository" {
   for_each = module.repositories
 
-  # replace the repository every time
+  # reimport the repository once a day
   # it is more convenient than running some bash script every time
   lifecycle {
     replace_triggered_by = [
-      random_uuid.force_recreation
+      time_rotating.day
     ]
   }
 
