@@ -13,5 +13,5 @@ env:
   GITLAB_TOKEN: ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
 
 jobs:
-  main:
+  call:
     uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@feature/add-terraform-workflow
