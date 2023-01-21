@@ -43,9 +43,9 @@ resource "github_repository" "repository" {
     // if repository config has a template definition, create the block
     for_each = var.config.template[*]
     content {
-      include_all_branches = template.value.content.include_all_branches
-      owner                = template.value.content.owner
-      repository           = template.value.content.repository
+      include_all_branches = template.value.include_all_branches
+      owner                = template.value.owner
+      repository           = template.value.repository
     }
   }
 

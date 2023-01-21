@@ -1,4 +1,25 @@
 locals {
+  # inject defaults into repositories
+  repositories = {
+    for name, config in local.repositories_initial :
+    name => merge(local.repositories_defaults, config)
+  }
+
+  # defaults for repositories
+  repositories_defaults = {
+    template = {
+      include_all_branches = true
+      owner                = local.owner
+      repository           = "template-${local.owner}-default"
+    }
+    branch_protections = {
+      main = {
+        enforce_admins                  = true
+        required_approving_review_count = 0
+      }
+    }
+  }
+
   # create a map of branch_protections with unique keys for `for_each`
   branch_protections = {
     for item in local.branch_protections_list :
@@ -18,12 +39,6 @@ locals {
       )
     ]
   ])
-
-  # default branch_protection config for the main branch
-  branch_protections_main = {
-    enforce_admins                  = true
-    required_approving_review_count = 0
-  }
 
   # dictionary of topics to reuse
   topics = {
@@ -46,13 +61,27 @@ locals {
   }
 
   # main repository config
-  repositories = {
-    "template-personal-default" = {
+  repositories_initial = {
+    "ci-actions-${local.owner}" = {
       description = join(" ", [
-        "Template for my repositories"
+        "Github actions for ${local.owner} repositories"
       ])
       homepage_url = join("/", [
-        local.owner_url, "template-personal-default"
+        local.owner_url, "ci-actions-${local.owner}"
+      ])
+      topics = concat(
+        local.topics.common, local.topics.ghaction,
+        []
+      )
+    }
+
+    "template-${local.owner}-default" = {
+      is_template = true
+      description = join(" ", [
+        "Default template for ${local.owner} repositories"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "template-${local.owner}-default"
       ])
       topics = concat(
         local.topics.common, local.topics.shields, local.topics.template,
@@ -71,9 +100,6 @@ locals {
         local.topics.common, local.topics.terraform,
         []
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     ".github" = {
@@ -87,9 +113,6 @@ locals {
         local.topics.common, local.topics.readme,
         []
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "infra-cloud-${local.owner_fqdn}" = {
@@ -104,9 +127,6 @@ locals {
         local.topics.packer,
         ["cloud-init"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "misc-personal-dotfiles" = {
@@ -121,9 +141,6 @@ locals {
         ["dotfiles", "vim", "bash", "firefox", "ansible", "vimrc",
         "firefox-css"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "${local.owner}.github.io" = {
@@ -140,9 +157,6 @@ locals {
       pages = {
         cname = local.owner_fqdn
       }
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "app-android-anki-chinese-flashcards-enricher" = {
@@ -156,9 +170,6 @@ locals {
         local.topics.common,
         ["app", "android", "kotlin"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "plugin-firefox-new-tab-bookmarks" = {
@@ -174,9 +185,6 @@ locals {
         local.topics.common, local.topics.web, local.topics.abandoned,
         ["javascript", "firefox", "firefox-addon"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "app-desktop-useless-cpp-gui" = {
@@ -192,9 +200,6 @@ locals {
         local.topics.common, local.topics.abandoned,
         ["desktop-app", "gui", "qt", "cpp", "qt5"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "snippets-javascript-assignments" = {
@@ -209,9 +214,6 @@ locals {
         local.topics.web, local.topics.common,
         []
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "app-web-crawler-book-creator" = {
@@ -229,9 +231,6 @@ locals {
         local.topics.web, local.topics.webapp,
         ["django", "web-scraping"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "app-web-tianyi" = {
@@ -248,9 +247,6 @@ locals {
         local.topics.vuejs, local.topics.abandoned, local.topics.common,
         ["redis", "spa", "postgresql", "scss", "vuex-store"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "app-cli-autoscroll" = {
@@ -265,9 +261,6 @@ locals {
         local.topics.python, local.topics.common, local.topics.finished,
         ["pyqt5", "cli-app"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "app-web-django-assignment" = {
@@ -284,9 +277,6 @@ locals {
         local.topics.finished,
         ["python", "bootstrap", "django", "ssr", "python3"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "snippets-golang-leetcode" = {
@@ -300,9 +290,6 @@ locals {
         local.topics.go, local.topics.common,
         ["leetcode", "leetcode-solutions"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
 
     "plugin-sonatype-nexus-security-check" = {
@@ -317,9 +304,6 @@ locals {
         local.topics.nexus, local.topics.common, local.topics.finished,
         ["plugin", "java", "maven", "apache-karaf", "sonatype-nexus-plugin"]
       )
-      branch_protections = {
-        "main" = local.branch_protections_main
-      }
     }
   }
 }
