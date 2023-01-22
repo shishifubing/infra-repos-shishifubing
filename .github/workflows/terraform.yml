@@ -9,7 +9,7 @@ on:
 jobs:
   call:
     uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@test/mask-env
-    with:
+    secrets:
       env: |
         AWS_ACCESS_KEY_ID=${{ secrets.TERRAFORM_BUCKET_ID }}
         AWS_SECRET_ACCESS_KEY=${{ secrets.TERRAFORM_BUCKET_KEY }}
