@@ -10,7 +10,13 @@ jobs:
   call:
     uses: shishifubing-com/ci-actions-common/.github/workflows/terraform.yml@main
     secrets:
-      token_github: ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
-      token_gitlab: ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
-      aws_key_id: ${{ secrets.TERRAFORM_BUCKET_ID }}
-      aws_key: ${{ secrets.TERRAFORM_BUCKET_KEY }}
+      env: |
+        AWS_ACCESS_KEY_ID=${{ secrets.TERRAFORM_BUCKET_ID }}
+        AWS_SECRET_ACCESS_KEY=${{ secrets.TERRAFORM_BUCKET_KEY }}
+        GITLAB_TOKEN=${{ secrets.TERRAFORM_TOKEN_GITLAB }}
+        GITHUB_TOKEN=${{ secrets.TERRAFORM_TOKEN_GITHUB }}
+      mask: |
+        ${{ secrets.TERRAFORM_BUCKET_ID }}
+        ${{ secrets.TERRAFORM_BUCKET_KEY }}
+        ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
+        ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
