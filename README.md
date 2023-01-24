@@ -1,14 +1,14 @@
-# [`infra-repos-shishifubing-com`][repo]
+# [`infra-repos-shishifubing`][repo-url]
 
 [![terraform][terraform-workflow-shield]][terraform-workflow-url]
 
-This terraform module manages [shishifubing-com]:
+This terraform module manages [shishifubing][owner-url] organization:
 
 - It manages repositories
 - It manages branch protection rules
 - It manages organization settings
 - It manages organization membership
-- It mirrors all repositories in [shishifubing-com] to [Gitlab][shishifubing-com-gitlab]
+- It mirrors all repositories in [shishifubing][owner-url] to [Gitlab][owner-gitlab-url]
 
 # Usage
 
@@ -51,7 +51,7 @@ terraform-docs markdown table --recursive --output-file README.md .
 
 # Getting started
 
-[Setup an s3 bucket, setup terraform][setup]
+[Setup an s3 bucket, setup terraform][setup-url]
 
 ```bash
 # export auth variables
@@ -71,19 +71,15 @@ terraform apply
 
 <!-- shield links -->
 
-[terraform-workflow-shield]: https://img.shields.io/github/actions/workflow/status/shishifubing-com/infra-repos-shishifubing-com/terraform.yml?label=Terraform&style=for-the-badge
+[terraform-workflow-shield]: https://img.shields.io/github/actions/workflow/status/shishifubing/infra-repos/terraform.yml?label=Terraform&style=for-the-badge
 
 <!-- external links -->
 
-[shishifubing-com]: https://github.com/shishifubing-com
-[shishifubing-com-gitlab]: https://gitlab.com/shishifubing-com
-[repo]: https://github.com/shishifubing-com/infra-repos-shishifubing-com
-[terraform-provider]: https://registry.tfpla.net/providers/integrations/github/latest
-[setup]: https://github.com/shishifubing-com/infra-cloud-shishifubing.com/tree/main/cloud/yandex#setup-terraform-backend-and-local-environment
-[terraform-action]: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
-[github_repository]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/repository
-[github_branch_protection]: https://registry.tfpla.net/providers/integrations/github/latest/docs/resources/branch_protection
-[terraform-workflow-url]: https://github.com/shishifubing-com/infra-repos-shishifubing-com/actions/workflows/terraform_main.yml
+[owner-url]: https://github.com/shishifubing
+[owner-gitlab-url]: https://gitlab.com/shishifubing
+[repo-url]: https://github.com/shishifubing/infra-repos-shishifubing
+[setup-url]: https://github.com/shishifubing/infra-cloud-shishifubing.com/tree/main/cloud/yandex#setup-terraform-backend-and-local-environment
+[terraform-workflow-url]: https://github.com/shishifubing/infra-repos-shishifubing/actions/workflows/terraform_main.yml
 
 # Module documentation
 
