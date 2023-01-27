@@ -35,8 +35,7 @@ resource "gitlab_project" "repositories" {
   for_each = module.repositories
 
   lifecycle {
-    # reimport the repository once a day
-    # it is more convenient than running some bash script every time
+    # reimport each repository once a day
     replace_triggered_by = [
       time_rotating.day
     ]
