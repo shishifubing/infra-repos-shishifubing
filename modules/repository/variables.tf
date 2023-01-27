@@ -59,7 +59,8 @@ variable "config" {
           object({ status = string }),
           { status = "enabled" }
         )
-      })
+      }),
+      {}
     )
 
     pages = optional(object({

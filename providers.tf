@@ -20,7 +20,7 @@ terraform {
 locals {
   name       = "shishifubing"
   bio        = "事实浮冰"
-  owner      = "${local.name}-com"
+  owner      = local.name
   owner_url  = "https://github.com/${local.owner}"
   owner_fqdn = "${local.name}.com"
   email      = "97828377+shishifubing@users.noreply.github.com"

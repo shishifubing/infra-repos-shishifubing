@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuxo pipefail
 
-owner="${1:-shishifubing-com}"
+owner="${1:-shishifubing}"
 
 template_name="{{ range . }}{{ .name }} {{ end }}"
 template_pattern="{{ range .data.repository.branchProtectionRules.nodes }}{{ .pattern }} {{ end }}"
@@ -15,7 +15,7 @@ function resource_rule() {
 }
 
 function resource_gitlab() {
-    echo "gitlab_project.repository[\"${1}\"]"
+    echo "gitlab_project.repositories[\"${1}\"]"
 }
 
 repos=$(
@@ -25,10 +25,10 @@ repos=$(
 )
 read -ra repos <<<"${repos}"
 
-gitlab_repos=$(
+mapfile -t gitlab_repos < <(
     glab api graphql --field query="
         query(\$endCursor: String) {
-            group(fullPath: \"shishifubing-com\") {
+            group(fullPath: \"${owner}\") {
                 projects(after: \$endCursor) {
                     pageInfo {
                         endCursor
@@ -49,15 +49,14 @@ gitlab_repos=$(
             .name
     '
 )
-read -ra gitlab_repos <<<"${gitlab_repos}"
 
 terraform import                \
     "github_membership.bot"     \
     "${owner}:shishifubing-bot"
 
-terraform import \
-    "github_organization_settings.organization"
-    "shishifubing-com"
+terraform import                                \
+    "github_organization_settings.organization" \
+    "${owner}"
 
 for repo in "${repos[@]}"; do
     terraform import                       \
@@ -86,7 +85,10 @@ for repo in "${repos[@]}"; do
 done
 
 for repo in "${gitlab_repos[@]}"; do
+    # gitlab repository names cannot start with a special character
+    repo_name="${repo}"
+    [[ "${repo:0:1}" == "." ]] && repo_name="dot-${repo:1}"
     terraform import                   \
         "$(resource_gitlab "${repo}")" \
-        "${owner}/${repo}"
+        "${owner}/${repo_name}"
 done

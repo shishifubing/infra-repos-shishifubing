@@ -7,7 +7,6 @@ resource "github_organization_settings" "organization" {
   billing_email                                                = local.email
   company                                                      = local.name
   blog                                                         = local.site
-  location                                                     = "Russian Federation"
   name                                                         = local.name
   description                                                  = local.bio
   has_organization_projects                                    = true
