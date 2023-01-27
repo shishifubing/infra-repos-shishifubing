@@ -81,9 +81,9 @@ terraform apply
 
 <!-- project links -->
 
-[terraform-workflow-url]: https://github.com/shishifubing/infra-repos-shishifubing/actions/workflows/terraform.yml
 [repo-url]: https://github.com/shishifubing/infra-repos-shishifubing
-[license-url]: https://github.com/shishifubing/infra-repos-shishifubing/blob/main/LICENSE
+[license-url]: https://github.com/shishifubing/infra-repos-shishifubing/actions/workflows/terraform.yml
+[terraform-workflow-url]: https://github.com/
 
 <!-- shield links -->
 
