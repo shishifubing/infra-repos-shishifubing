@@ -10,7 +10,7 @@ locals {
     template = {
       include_all_branches = true
       owner                = local.owner
-      repository           = "template-${local.owner}-default"
+      repository           = "template-repository-default"
     }
     branch_protections = {
       main = {
@@ -75,7 +75,7 @@ locals {
       )
     }
 
-    "template-${local.owner}-default" = {
+    "template-repository-default" = {
       is_template = true
       description = join(" ", [
         "Default template for ${local.owner} repositories"
@@ -145,7 +145,7 @@ locals {
 
     "${local.owner}.github.io" = {
       description = join(" ", [
-        "Personal site"
+        "Website"
       ])
       homepage_url = join("/", [
         "https://${local.owner_fqdn}"
@@ -173,10 +173,8 @@ locals {
     }
 
     "plugin-firefox-new-tab-bookmarks" = {
-      archived = true
       description = join(" ", [
-        "Plugin for Firefox, boring",
-        "[abandoned]"
+        "Plugin for Firefox, boring"
       ])
       homepage_url = join("/", [
         local.owner_url, "plugin-firefox-new-tab-bookmarks"
@@ -188,10 +186,8 @@ locals {
     }
 
     "app-desktop-useless-cpp-gui" = {
-      archived = true
       description = join(" ", [
-        "Desktop GUI written using C++ and Qt, it does absolutely nothing",
-        "[abandoned]"
+        "Desktop GUI written using C++ and Qt, it does absolutely nothing"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-desktop-useless-cpp-gui"
@@ -203,7 +199,6 @@ locals {
     }
 
     "snippets-javascript-assignments" = {
-      archived = true
       description = join(" ", [
         "Javascript assignments, boring",
       ])
@@ -217,11 +212,9 @@ locals {
     }
 
     "app-web-crawler-book-creator" = {
-      archived = true
       description = join(" ", [
         "Web scraper I was building in java a long time ago and ",
-        "started remaking using Django",
-        "[abandoned]"
+        "started remaking using Django"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-web-crawler-book-creator"
@@ -234,10 +227,8 @@ locals {
     }
 
     "app-web-tianyi" = {
-      archived = true
       description = join(" ", [
-        "SPA CI/CD app",
-        "[abandoned]"
+        "SPA CI/CD app"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-web-tianyi"
@@ -251,8 +242,7 @@ locals {
 
     "app-cli-autoscroll" = {
       description = join(" ", [
-        "Cross-platform CLI app enabling autoscroll",
-        "[finished]"
+        "Cross-platform CLI app enabling autoscroll"
       ])
       homepage_url = join("/", [
         "https://pypi.org/project", "autoscroll"
@@ -264,10 +254,8 @@ locals {
     }
 
     "app-web-django-assignment" = {
-      archived = true
       description = join(" ", [
-        "SSR web app",
-        "[finished]"
+        "SSR web app I built for a Fullstack Python Web Developer course"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-web-django-assignment"
@@ -294,8 +282,7 @@ locals {
 
     "plugin-sonatype-nexus-security-check" = {
       description = join(" ", [
-        "Security plugin for Sonatype Nexus 3",
-        "[finished]"
+        "Security plugin for Sonatype Nexus 3"
       ])
       homepage_url = join("/", [
         local.owner_url, "plugin-sonatype-nexus-security-check"

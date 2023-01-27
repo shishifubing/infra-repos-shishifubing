@@ -15,7 +15,13 @@ module "branch_protections" {
   config = each.value
 }
 
-# gitlab projects mirroring github repositories
+resource "github_branch_default" "default" {
+  for_each = module.repositories
+
+  repository = each.key
+  branch     = "main"
+}
+
 data "gitlab_group" "group" {
   full_path = local.owner
 }
@@ -25,16 +31,15 @@ resource "time_rotating" "day" {
   rotation_days = 1
 }
 
-resource "gitlab_project" "repository" {
+resource "gitlab_project" "repositories" {
   for_each = module.repositories
 
   lifecycle {
-    # reimport the repository once a day
-    # it is more convenient than running some bash script every time
+    # reimport each repository once a day
     replace_triggered_by = [
       time_rotating.day
     ]
-    # ignore all changes: modifying gitlab repositories is pointless
+    # modifying gitlab repositories is pointless since they are going to be replaced anyway
     ignore_changes = all
   }
 
@@ -45,7 +50,8 @@ resource "gitlab_project" "repository" {
   ) : each.value.repository.name
   description = join(" ", [
     each.value.repository.description,
-    "[mirror of ${each.value.repository.html_url}]"
+    "[mirror of ${each.value.repository.html_url}]",
+    "[${time_rotating.day.id}]"
   ])
   import_url       = each.value.repository.http_clone_url
   namespace_id     = data.gitlab_group.group.group_id

@@ -15,7 +15,7 @@ variable "config" {
     push_restrictions   = optional(list(string))
 
     // `require` settings
-    require_signed_commits          = optional(bool, true)
+    require_signed_commits          = optional(bool, false)
     required_linear_history         = optional(bool, true)
     require_conversation_resolution = optional(bool, true)
     required_status_checks = optional(
