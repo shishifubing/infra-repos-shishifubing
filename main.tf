@@ -39,8 +39,9 @@ resource "gitlab_project" "repositories" {
     replace_triggered_by = [
       time_rotating.day
     ]
+    # if you set `all`, replace_triggered_by will not work
     ignore_changes = [
-      tags, topics
+      allow_merge_on_skipped_pipeline, analytics_access_level, approvals_before_merge, archived, auto_cancel_pending_pipelines, auto_devops_deploy_strategy, auto_devops_enabled, autoclose_referenced_issues, avatar_hash, avatar_url, build_git_strategy, build_timeout, builds_access_level, ci_default_git_depth, ci_forward_deployment_enabled, ci_separated_caches, container_registry_access_level, container_registry_enabled, default_branch, description, emails_disabled, forked_from_project_id, forking_access_level, http_url_to_repo, id, import_url, issues_access_level, issues_enabled, lfs_enabled, merge_method, merge_pipelines_enabled, merge_requests_access_level
     ]
   }
 
