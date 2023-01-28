@@ -39,8 +39,9 @@ resource "gitlab_project" "repositories" {
     replace_triggered_by = [
       time_rotating.day
     ]
-    # modifying gitlab repositories is pointless since they are going to be replaced anyway
-    ignore_changes = all
+    ignore_changes = [
+      tags, topics
+    ]
   }
 
   # gitlab repository names cannot start with a special character
