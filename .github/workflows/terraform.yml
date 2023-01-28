@@ -7,16 +7,16 @@ on:
   pull_request:
 
 jobs:
-  call:
-    uses: shishifubing/ci-actions-common/.github/workflows/terraform.yml@main
-    secrets:
-      env: |
-        AWS_ACCESS_KEY_ID=${{ secrets.TERRAFORM_BUCKET_ID }}
-        AWS_SECRET_ACCESS_KEY=${{ secrets.TERRAFORM_BUCKET_KEY }}
-        GITLAB_TOKEN=${{ secrets.TERRAFORM_TOKEN_GITLAB }}
-        GITHUB_TOKEN=${{ secrets.TERRAFORM_TOKEN_GITHUB }}
-      mask: |
-        ${{ secrets.TERRAFORM_BUCKET_ID }}
-        ${{ secrets.TERRAFORM_BUCKET_KEY }}
-        ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
-        ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
+  terraform:
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:1.3.7
+
+    steps:
+      - name: run terraform
+        uses: shishifubing/ci-actions-common/actions/terraform@main
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_BUCKET_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_BUCKET_KEY }}
+          GITLAB_TOKEN: ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
+          GITHUB_TOKEN: ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
