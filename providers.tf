@@ -23,7 +23,7 @@ locals {
   owner      = local.name
   owner_url  = "https://github.com/${local.owner}"
   owner_fqdn = "${local.name}.com"
-  email      = "97828377+shishifubing@users.noreply.github.com"
+  email      = "shishifubing@gmail.com"
   site       = "https://${local.owner_fqdn}"
 }
 
