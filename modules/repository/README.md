@@ -17,13 +17,13 @@ It provides defaults to reduce boilerplate
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_github"></a> [github](#requirement\_github) | >= 5.0.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | >= 5 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | >= 5.0.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | >= 5 |
 
 ## Modules
 
