@@ -1,9 +1,9 @@
 # Modules
 
-- [branch_protection] - wrapper for Github's [github_repository]
-- [repository] - wrapper for Github's [github_branch_protection]
+- [branch_protection] - wrapper for Github's [github_branch_protection]
+- [repository] - wrapper for Github's [github_repository]
 
-<!-- internal links -->
+<!-- relative links -->
 
 [branch_protection]: ./branch_protection/
 [repository]: ./repository/
