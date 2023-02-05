@@ -7,11 +7,6 @@ locals {
 
   # defaults for repositories
   repositories_defaults = {
-    template = {
-      include_all_branches = true
-      owner                = local.owner
-      repository           = "template-repository-default"
-    }
     branch_protections = {
       main = {
         enforce_admins                  = true
