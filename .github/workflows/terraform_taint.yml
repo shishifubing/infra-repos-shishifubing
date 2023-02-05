@@ -1,0 +1,28 @@
+name: terraform_taint
+
+on:
+  schedule:
+    # every day at 00:00
+    - cron: 0 0 * * *
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:1.3.7
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_BUCKET_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_BUCKET_KEY }}
+      GITLAB_TOKEN: ${{ secrets.TERRAFORM_TOKEN_GITLAB }}
+      GITHUB_TOKEN: ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: taint gitlab repositories
+        run: |
+          terraform init
+          for repository in "$(terraform output -raw repositories)"; do
+          terraform taint "gitlab_project.repositories[\"${repository}\"]"
+          done
