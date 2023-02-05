@@ -60,7 +60,11 @@ variable "config" {
           { status = "enabled" }
         )
       }),
-      {}
+      {
+        advanced_security               = { status = "enabled" }
+        secret_scanning                 = { status = "enabled" }
+        secret_scanning_push_protection = { status = "enabled" }
+      }
     )
 
     pages = optional(object({
