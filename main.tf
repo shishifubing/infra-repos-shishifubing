@@ -26,12 +26,24 @@ data "gitlab_group" "group" {
   full_path = local.owner
 }
 
+
+resource "time_rotating" "day" {
+  rotation_days = 1
+}
+
+# I have to use time_static because of https://github.com/hashicorp/terraform-provider-time/issues/118
+resource "time_static" "day" {
+  rfc3339 = time_rotating.day.rfc3339
+}
+
 resource "gitlab_project" "repositories" {
   for_each = module.repositories
 
   lifecycle {
     # ignore all changes to not clutter logs
     ignore_changes = all
+    # replace every day
+    replace_triggered_by = [time_static.day]
   }
 
   # gitlab repository names cannot start with a special character
