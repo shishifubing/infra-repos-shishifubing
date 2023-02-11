@@ -22,4 +22,4 @@ jobs:
 
     steps:
       - name: run terraform
-        uses: shishifubing/ci-actions-common/actions/terraform@main
+        uses: shishifubing/ci-actions-common/actions/terraform@bugfix/terraform/fix-argument-too-long
