@@ -1,13 +1,16 @@
 name: terraform
 
 on:
+  schedule:
+    # at the end of every day
+    - cron: 0 0 * * *
   push:
     branches:
       - main
   pull_request:
 
 jobs:
-  terraform:
+  run:
     runs-on: ubuntu-latest
     container:
       image: hashicorp/terraform:1.3.7

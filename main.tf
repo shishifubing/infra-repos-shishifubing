@@ -53,7 +53,8 @@ resource "gitlab_project" "repositories" {
   ) : each.value.repository.name
   description = join(" ", [
     each.value.repository.description,
-    "[mirror of ${each.value.repository.html_url}]"
+    "[mirror of ${each.value.repository.html_url}]",
+    "[${time_static.day.rfc3339}]"
   ])
   import_url       = each.value.repository.http_clone_url
   namespace_id     = data.gitlab_group.group.group_id
