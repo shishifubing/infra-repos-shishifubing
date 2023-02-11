@@ -1,7 +1,7 @@
 # Modules
 
-- [branch_protection] - wrapper for Github's [github_branch_protection]
-- [repository] - wrapper for Github's [github_repository]
+- [branch_protection] - wrapper for [github_branch_protection]
+- [repository] - wrapper for [github_repository]
 
 <!-- relative links -->
 

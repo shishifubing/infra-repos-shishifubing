@@ -2,7 +2,7 @@
 
 <!-- shields -->
 
-[![AGPLv3.0 License][license-shield]][license-url]
+[![License][license-shield]][license-url]
 [![Terraform][terraform-workflow-shield]][terraform-workflow-url]
 
 <!-- description -->
@@ -15,6 +15,12 @@ This terraform module manages [shishifubing][owner-url] organization:
 - It manages organization settings
 - It manages organization membership
 - It mirrors all repositories in [shishifubing][owner-url] to [Gitlab][owner-gitlab-url]
+
+> **Note**
+>
+> Pull mirroring is a premium Gitlab feature,
+> so all Gitlab repositories are destroyed and then imported once a day
+> to "_mirror_" them
 
 <!-- usage -->
 
@@ -31,7 +37,7 @@ This terraform module manages [shishifubing][owner-url] organization:
 ### CI
 
 - Commit
-- Make PR
+- PR
 - Merge
 
 ### Manual
@@ -42,13 +48,6 @@ This terraform module manages [shishifubing][owner-url] organization:
 # update the infrastructure
 terraform apply
 ```
-
-### Mirroring
-
-> **Note**
->
-> Pull mirroring is a premium Gitlab feature,
-> so all Gitlab repositories are destroyed and then imported to "_mirror_" them
 
 ### Regenerate module documentation
 
@@ -105,6 +104,7 @@ terraform apply
 | --------------------------------------------------------------- | ------- |
 | <a name="requirement_github"></a> [github](#requirement_github) | 5.14.0  |
 | <a name="requirement_gitlab"></a> [gitlab](#requirement_gitlab) | 15.7.1  |
+| <a name="requirement_null"></a> [null](#requirement_null)       | 3.2.1   |
 | <a name="requirement_time"></a> [time](#requirement_time)       | 0.9.1   |
 
 ## Providers
@@ -113,6 +113,7 @@ terraform apply
 | --------------------------------------------------------- | ------- |
 | <a name="provider_github"></a> [github](#provider_github) | 5.14.0  |
 | <a name="provider_gitlab"></a> [gitlab](#provider_gitlab) | 15.7.1  |
+| <a name="provider_time"></a> [time](#provider_time)       | 0.9.1   |
 
 ## Modules
 
@@ -129,6 +130,8 @@ terraform apply
 | [github_membership.bot](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/membership)                                | resource    |
 | [github_organization_settings.organization](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/organization_settings) | resource    |
 | [gitlab_project.repositories](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project)                                 | resource    |
+| [time_rotating.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/rotating)                                            | resource    |
+| [time_static.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/static)                                                | resource    |
 | [gitlab_group.group](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/data-sources/group)                                         | data source |
 
 ## Inputs
@@ -137,6 +140,8 @@ No inputs.
 
 ## Outputs
 
-No outputs.
+| Name                                                                    | Description                 |
+| ----------------------------------------------------------------------- | --------------------------- |
+| <a name="output_repositories"></a> [repositories](#output_repositories) | list of github repositories |
 
 <!-- END_TF_DOCS -->
