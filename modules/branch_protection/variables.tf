@@ -16,7 +16,7 @@ variable "config" {
 
     // `require` settings
     require_signed_commits          = optional(bool, false)
-    required_linear_history         = optional(bool, true)
+    required_linear_history         = optional(bool, false)
     require_conversation_resolution = optional(bool, true)
     required_status_checks = optional(
       map(object({
@@ -32,7 +32,7 @@ variable "config" {
         dismissal_restrictions          = optional(list(string))
         pull_request_bypassers          = optional(list(string))
         require_code_owner_reviews      = optional(bool, true)
-        required_approving_review_count = optional(number, 1)
+        required_approving_review_count = optional(number, 0)
         require_last_push_approval      = optional(bool, false)
       }),
       {

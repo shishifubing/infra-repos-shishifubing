@@ -8,9 +8,14 @@ locals {
   # defaults for repositories
   repositories_defaults = {
     branch_protections = {
-      main = {
+      "main" = {
         enforce_admins                  = true
         required_approving_review_count = 0
+      }
+      "*" = {
+        required_linear_history = true
+        allows_deletions        = true
+        allows_force_pushes     = true
       }
     }
   }
@@ -53,6 +58,8 @@ locals {
     shields      = ["shieldsio", "shields-io"]
     template     = ["template", "template-project", "template-repository"]
     packer       = ["packer"]
+    ci           = ["ci"]
+    pages        = ["github-pages"]
   }
 
   # main repository config
@@ -86,7 +93,7 @@ locals {
 
     "infra-repos-${local.owner}" = {
       description = join(" ", [
-        "Terraform module managing repositories in ${local.owner_url}"
+        "Terraform module managing repositories in ${local.owner} organization"
       ])
       homepage_url = join("/", [
         local.owner_url, "infra-repos-${local.owner}"
@@ -188,8 +195,8 @@ locals {
         local.owner_url, "app-desktop-useless-cpp-gui"
       ])
       topics = concat(
-        local.topics.common, local.topics.abandoned,
-        ["desktop-app", "gui", "qt", "cpp", "qt5"]
+        local.topics.common, local.topics.abandoned, local.topics.ci,
+        ["desktop-app", "gui", "qt", "cpp", "qt5", "appimage"]
       )
     }
 
@@ -198,12 +205,13 @@ locals {
         "Javascript assignments, boring",
       ])
       homepage_url = join("/", [
-        local.owner_url, "snippets-javascript-assignments"
+        local.site, "snippets-javascript-assignments/"
       ])
       topics = concat(
-        local.topics.web, local.topics.common,
+        local.topics.web, local.topics.common, local.topics.pages,
         []
       )
+      pages = {}
     }
 
     "app-web-crawler-book-creator" = {
