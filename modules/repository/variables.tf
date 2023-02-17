@@ -34,9 +34,9 @@ variable "config" {
 
     // PR settings
     allow_auto_merge            = optional(bool, false)
-    allow_merge_commit          = optional(bool, false)
-    allow_rebase_merge          = optional(bool, false)
-    allow_squash_merge          = optional(bool, true)
+    allow_merge_commit          = optional(bool, true)
+    allow_rebase_merge          = optional(bool, true)
+    allow_squash_merge          = optional(bool, false)
     allow_update_branch         = optional(bool, true)
     delete_branch_on_merge      = optional(bool, true)
     merge_commit_message        = optional(string, "PR_TITLE")
