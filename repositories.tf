@@ -14,6 +14,8 @@ locals {
       }
       "*" = {
         required_linear_history = true
+        allows_deletions        = true
+        allows_force_pushes     = true
       }
     }
   }
