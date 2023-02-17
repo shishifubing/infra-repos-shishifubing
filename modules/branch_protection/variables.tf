@@ -16,7 +16,7 @@ variable "config" {
 
     // `require` settings
     require_signed_commits          = optional(bool, false)
-    required_linear_history         = optional(bool, true)
+    required_linear_history         = optional(bool, false)
     require_conversation_resolution = optional(bool, true)
     required_status_checks = optional(
       map(object({
