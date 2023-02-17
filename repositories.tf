@@ -86,7 +86,7 @@ locals {
 
     "infra-repos-${local.owner}" = {
       description = join(" ", [
-        "Terraform module managing repositories in ${local.owner_url}"
+        "Terraform module managing repositories in ${local.owner} organization"
       ])
       homepage_url = join("/", [
         local.owner_url, "infra-repos-${local.owner}"
