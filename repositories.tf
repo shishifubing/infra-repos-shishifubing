@@ -58,6 +58,8 @@ locals {
     shields      = ["shieldsio", "shields-io"]
     template     = ["template", "template-project", "template-repository"]
     packer       = ["packer"]
+    ci           = ["ci"]
+    pages        = ["github-pages"]
   }
 
   # main repository config
@@ -193,8 +195,8 @@ locals {
         local.owner_url, "app-desktop-useless-cpp-gui"
       ])
       topics = concat(
-        local.topics.common, local.topics.abandoned,
-        ["desktop-app", "gui", "qt", "cpp", "qt5"]
+        local.topics.common, local.topics.abandoned, local.topics.ci,
+        ["desktop-app", "gui", "qt", "cpp", "qt5", "appimage"]
       )
     }
 
@@ -203,12 +205,13 @@ locals {
         "Javascript assignments, boring",
       ])
       homepage_url = join("/", [
-        local.owner_url, "snippets-javascript-assignments"
+        local.site, "snippets-javascript-assignments/"
       ])
       topics = concat(
-        local.topics.web, local.topics.common,
+        local.topics.web, local.topics.common, local.topics.pages,
         []
       )
+      pages = {}
     }
 
     "app-web-crawler-book-creator" = {
