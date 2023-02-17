@@ -8,9 +8,12 @@ locals {
   # defaults for repositories
   repositories_defaults = {
     branch_protections = {
-      main = {
+      "main" = {
         enforce_admins                  = true
         required_approving_review_count = 0
+      }
+      "*" = {
+        required_linear_history = true
       }
     }
   }
