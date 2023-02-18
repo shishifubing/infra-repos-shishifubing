@@ -9,10 +9,10 @@ module "repositories" {
 
 # branch protection rules for github repositories
 module "branch_protections" {
-  for_each = local.branch_protections
-  source   = "./modules/branch_protection"
+  count  = length(local.branch_protections)
+  source = "./modules/branch_protection"
 
-  config = each.value
+  config = local.branch_protections[count.index]
 }
 
 resource "github_branch_default" "default" {
