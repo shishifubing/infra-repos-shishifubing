@@ -64,7 +64,7 @@ for repo in "${gitlab_repos[@]}"; do
     # gitlab repository names cannot start with a special character
     repo_name="${repo}"
     [[ "${repo:0:1}" == "." ]] && repo_name="dot-${repo:1}"
-    terraform import                            \
+    terraform import                               \
         "gitlab_project.repositories[\"${repo}\"]" \
         "${owner}/${repo_name}"
 done
