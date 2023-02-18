@@ -12,7 +12,7 @@ module "branch_protections_main" {
   source   = "./modules/branch_protection"
 
   config = {
-    repository_id                   = each.value.repository.name
+    repository_id                   = each.value.repository.node_id
     pattern                         = "main"
     enforce_admins                  = true
     required_approving_review_count = 0
@@ -25,7 +25,7 @@ module "branch_protections_wildcard" {
   depends_on = [module.branch_protections_main]
 
   config = {
-    repository_id           = each.value.repository.name
+    repository_id           = each.value.repository.node_id
     pattern                 = "*"
     required_linear_history = true
     allows_deletions        = true
