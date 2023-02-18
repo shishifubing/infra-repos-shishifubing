@@ -7,12 +7,30 @@ module "repositories" {
   config          = each.value
 }
 
-# branch protection rules for github repositories
-module "branch_protections" {
-  count  = length(local.branch_protections)
-  source = "./modules/branch_protection"
+module "branch_protections_main" {
+  for_each = module.repositories
+  source   = "./modules/branch_protection"
 
-  config = local.branch_protections[count.index]
+  config = {
+    repository_id                   = each.value.name
+    pattern                         = "main"
+    enforce_admins                  = true
+    required_approving_review_count = 0
+  }
+}
+
+module "branch_protections_wildcard" {
+  for_each   = module.repositories
+  source     = "./modules/branch_protection"
+  depends_on = [module.branch_protections_main]
+
+  config = {
+    repository_id           = each.value.name
+    pattern                 = "*"
+    required_linear_history = true
+    allows_deletions        = true
+    allows_force_pushes     = true
+  }
 }
 
 resource "github_branch_default" "default" {
