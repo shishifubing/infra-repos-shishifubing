@@ -120,10 +120,11 @@ terraform apply
 
 ## Modules
 
-| Name                                                                                      | Source                      | Version |
-| ----------------------------------------------------------------------------------------- | --------------------------- | ------- |
-| <a name="module_branch_protections"></a> [branch_protections](#module_branch_protections) | ./modules/branch_protection | n/a     |
-| <a name="module_repositories"></a> [repositories](#module_repositories)                   | ./modules/repository        | n/a     |
+| Name                                                                                                                 | Source                      | Version |
+| -------------------------------------------------------------------------------------------------------------------- | --------------------------- | ------- |
+| <a name="module_branch_protections_main"></a> [branch_protections_main](#module_branch_protections_main)             | ./modules/branch_protection | n/a     |
+| <a name="module_branch_protections_wildcard"></a> [branch_protections_wildcard](#module_branch_protections_wildcard) | ./modules/branch_protection | n/a     |
+| <a name="module_repositories"></a> [repositories](#module_repositories)                                              | ./modules/repository        | n/a     |
 
 ## Resources
 
