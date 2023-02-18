@@ -1,28 +1,30 @@
-# [`infra-repos-shishifubing`][repo-url]
+<div align="center" markdown="1">
 
-<!-- shields -->
+# [`infra-repos-shishifubing`][repo-url]
 
 [![License][license-shield]][license-url]
 [![Terraform][terraform-workflow-shield]][terraform-workflow-url]
 
-<!-- description -->
+This terraform module manages [shishifubing][owner-url] organization
 
-This terraform module manages [shishifubing][owner-url] organization:
+</div>
 
-- It manages repositories
-- It manages branch protection rules
-- It manages default branches
-- It manages organization settings
-- It manages organization membership
-- It mirrors all repositories in [shishifubing][owner-url] to [Gitlab][owner-gitlab-url]
+# About The Project
 
-> **Note**
->
-> Pull mirroring is a premium Gitlab feature,
-> so all Gitlab repositories are destroyed and then imported once a day
-> to "_mirror_" them
+## Features
 
-<!-- usage -->
+- Manages:
+  - repositories
+  - branch protection rules
+  - default branches
+  - organization settings
+  - organization membership
+- Mirrors all repositories in [shishifubing][owner-url] to [Gitlab][owner-gitlab-url]
+  > **Note**
+  >
+  > Pull mirroring is a premium Gitlab feature,
+  > so all Gitlab repositories are destroyed and then imported once a day
+  > to "_mirror_" them
 
 # Usage
 
@@ -34,13 +36,13 @@ This terraform module manages [shishifubing][owner-url] organization:
 >
 > 404 errors probably mean invalid token, check it
 
-### CI
+## CI
 
 - Commit
 - PR
 - Merge
 
-### Manual
+## Manual
 
 ```bash
 # export auth variables
@@ -49,7 +51,7 @@ This terraform module manages [shishifubing][owner-url] organization:
 terraform apply
 ```
 
-### Regenerate module documentation
+## Regenerate module documentation
 
 ```bash
 terraform-docs markdown table --recursive --output-file README.md .
