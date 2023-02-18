@@ -4,7 +4,6 @@ set -Eeuxo pipefail
 owner="${1:-shishifubing}"
 
 template_name="{{ range . }}{{ .name }} {{ end }}"
-template_pattern="{{ range .data.repository.branchProtectionRules.nodes }}{{ .pattern }} {{ end }}"
 
 function resource_repository() {
     echo "module.repositories[\"${1}\"].github_repository.repository"
@@ -54,8 +53,6 @@ mapfile -t gitlab_repos < <(
     '
 )
 
-branch_protection_rules=("main" "*")
-
 terraform import                \
     "github_membership.bot"     \
     "${owner}:shishifubing-bot"
@@ -69,11 +66,12 @@ for repo in "${repos[@]}"; do
         "$(resource_repository "${repo}")" \
         "${repo}"
 
-    for rule in "${branch_protection_rules[@]}"; do
-        terraform import                 \
-            "$(resource_rule "${repo}")" \
-            "${repo}:${rule}"
-    done
+    terraform import                      \
+        "$(resource_rule_main "${repo}")" \
+        "${repo}:main"
+    terraform import                          \
+        "$(resource_rule_wildcard "${repo}")" \
+        "${repo}:*"
 done
 
 for repo in "${gitlab_repos[@]}"; do
