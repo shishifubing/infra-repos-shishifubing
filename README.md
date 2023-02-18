@@ -14,12 +14,17 @@ Terraform module managing [shishifubing][url-owner] organization
 ## Features
 
 - Manages:
+
   - repositories
   - branch protection rules
   - default branches
   - organization settings
   - organization membership
+  - github action permissions
+  - tag protection rules
+
 - Mirrors all repositories in [shishifubing][url-owner] to [Gitlab][url-owner-gitlab]
+
   > **Note**
   >
   > Pull mirroring is a premium Gitlab feature,
