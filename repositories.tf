@@ -64,46 +64,7 @@ locals {
 
   # main repository config
   repositories_initial = {
-    "ci-actions-common" = {
-      description = join(" ", [
-        "Github actions for ${local.owner} repositories"
-      ])
-      homepage_url = join("/", [
-        local.owner_url, "ci-actions-${local.owner}"
-      ])
-      topics = concat(
-        local.topics.common, local.topics.ghaction,
-        []
-      )
-    }
-
-    "template-repository-default" = {
-      is_template = true
-      description = join(" ", [
-        "Default template for ${local.owner} repositories"
-      ])
-      homepage_url = join("/", [
-        local.owner_url, "template-${local.owner}-default"
-      ])
-      topics = concat(
-        local.topics.common, local.topics.shields, local.topics.template,
-        []
-      )
-    }
-
-    "infra-repos-${local.owner}" = {
-      description = join(" ", [
-        "Terraform module managing repositories in ${local.owner} organization"
-      ])
-      homepage_url = join("/", [
-        local.owner_url, "infra-repos-${local.owner}"
-      ])
-      topics = concat(
-        local.topics.common, local.topics.terraform,
-        []
-      )
-    }
-
+    # github repositories
     ".github" = {
       description = join(" ", [
         "Organization readme"
@@ -114,34 +75,6 @@ locals {
       topics = concat(
         local.topics.common, local.topics.readme,
         []
-      )
-    }
-
-    "infra-cloud-${local.owner_fqdn}" = {
-      description = join(" ", [
-        "Cloud infrastructure for ${local.owner_fqdn}"
-      ])
-      homepage_url = join("/", [
-        local.owner_url, "infra-cloud-${local.owner_fqdn}"
-      ])
-      topics = concat(
-        local.topics.common, local.topics.terraform, local.topics.yandex_cloud,
-        local.topics.packer,
-        ["cloud-init"]
-      )
-    }
-
-    "misc-personal-dotfiles" = {
-      description = join(" ", [
-        "Bash scripts, configs, ansible playbooks"
-      ])
-      homepage_url = join("/", [
-        local.owner_url, "misc-personal-dotfiles"
-      ])
-      topics = concat(
-        local.topics.common,
-        ["dotfiles", "vim", "bash", "firefox", "ansible", "vimrc",
-        "firefox-css"]
       )
     }
 
@@ -161,16 +94,117 @@ locals {
       }
     }
 
-    "app-android-anki-chinese-flashcards-enricher" = {
+    # ci repositories
+    "ci-actions-common" = {
       description = join(" ", [
-        "Android app to streamline my Chinese learning workflow"
+        "Github actions for ${local.owner} repositories"
       ])
       homepage_url = join("/", [
-        local.owner_url, "app-android-anki-chinese-flashcards-enricher"
+        local.owner_url, "ci-actions-${local.owner}"
+      ])
+      topics = concat(
+        local.topics.common, local.topics.ghaction,
+        []
+      )
+    }
+
+    # infra repositories
+    "infra-cloud-${local.owner_fqdn}" = {
+      description = join(" ", [
+        "Cloud infrastructure for ${local.owner_fqdn}"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "infra-cloud-${local.owner_fqdn}"
+      ])
+      topics = concat(
+        local.topics.common, local.topics.terraform, local.topics.yandex_cloud,
+        local.topics.packer,
+        ["cloud-init"]
+      )
+    }
+
+    "infra-repos-${local.owner}" = {
+      description = join(" ", [
+        "Terraform module managing repositories in ${local.owner} organization"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "infra-repos-${local.owner}"
+      ])
+      topics = concat(
+        local.topics.common, local.topics.terraform,
+        []
+      )
+    }
+
+    # template repositories
+    "template-repository-default" = {
+      is_template = true
+      description = join(" ", [
+        "Default template for ${local.owner} repositories"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "template-${local.owner}-default"
+      ])
+      topics = concat(
+        local.topics.common, local.topics.shields, local.topics.template,
+        []
+      )
+    }
+
+    # miscellaneous repositories
+    "misc-personal-dotfiles" = {
+      description = join(" ", [
+        "Bash scripts, configs, ansible playbooks"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "misc-personal-dotfiles"
       ])
       topics = concat(
         local.topics.common,
-        ["app", "android", "kotlin"]
+        ["dotfiles", "vim", "bash", "firefox", "ansible", "vimrc",
+        "firefox-css"]
+      )
+    }
+
+    # snippets repositories
+    "snippets-javascript-assignments" = {
+      description = join(" ", [
+        "Javascript assignments, boring",
+      ])
+      homepage_url = join("/", [
+        local.site, "snippets-javascript-assignments/"
+      ])
+      topics = concat(
+        local.topics.web, local.topics.common, local.topics.pages,
+        []
+      )
+      pages = {}
+    }
+
+    "snippets-golang-leetcode" = {
+      description = join(" ", [
+        "Some leetcode tasks"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "snippets-golang-leetcode"
+      ])
+      topics = concat(
+        local.topics.go, local.topics.common,
+        ["leetcode", "leetcode-solutions"]
+      )
+    }
+
+    # plugin repositories
+    "plugin-sonatype-nexus-security-check" = {
+      description = join(" ", [
+        "Security plugin for Sonatype Nexus 3"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "plugin-sonatype-nexus-security-check"
+      ])
+      topics = concat(
+        local.topics.nexus, local.topics.common, local.topics.finished,
+        ["plugin", "java", "maven", "apache-karaf", "sonatype-nexus-plugin"]
       )
     }
 
@@ -187,6 +221,20 @@ locals {
       )
     }
 
+    # app repositories
+    "app-android-anki-chinese-flashcards-enricher" = {
+      description = join(" ", [
+        "Android app to streamline my Chinese learning workflow"
+      ])
+      homepage_url = join("/", [
+        local.owner_url, "app-android-anki-chinese-flashcards-enricher"
+      ])
+      topics = concat(
+        local.topics.common,
+        ["app", "android", "kotlin"]
+      )
+    }
+
     "app-desktop-useless-cpp-gui" = {
       description = join(" ", [
         "Desktop GUI written using C++ and Qt, it does absolutely nothing"
@@ -198,20 +246,6 @@ locals {
         local.topics.common, local.topics.abandoned, local.topics.ci,
         ["desktop-app", "gui", "qt", "cpp", "qt5", "appimage"]
       )
-    }
-
-    "snippets-javascript-assignments" = {
-      description = join(" ", [
-        "Javascript assignments, boring",
-      ])
-      homepage_url = join("/", [
-        local.site, "snippets-javascript-assignments/"
-      ])
-      topics = concat(
-        local.topics.web, local.topics.common, local.topics.pages,
-        []
-      )
-      pages = {}
     }
 
     "app-web-crawler-book-creator" = {
@@ -267,32 +301,6 @@ locals {
         local.topics.web, local.topics.webapp, local.topics.common,
         local.topics.finished,
         ["python", "bootstrap", "django", "ssr", "python3"]
-      )
-    }
-
-    "snippets-golang-leetcode" = {
-      description = join(" ", [
-        "Some leetcode tasks"
-      ])
-      homepage_url = join("/", [
-        local.owner_url, "snippets-golang-leetcode"
-      ])
-      topics = concat(
-        local.topics.go, local.topics.common,
-        ["leetcode", "leetcode-solutions"]
-      )
-    }
-
-    "plugin-sonatype-nexus-security-check" = {
-      description = join(" ", [
-        "Security plugin for Sonatype Nexus 3"
-      ])
-      homepage_url = join("/", [
-        local.owner_url, "plugin-sonatype-nexus-security-check"
-      ])
-      topics = concat(
-        local.topics.nexus, local.topics.common, local.topics.finished,
-        ["plugin", "java", "maven", "apache-karaf", "sonatype-nexus-plugin"]
       )
     }
   }

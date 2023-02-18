@@ -1,28 +1,30 @@
-# [`infra-repos-shishifubing`][repo-url]
+<div align="center" markdown="1">
 
-<!-- shields -->
+# [`infra-repos-shishifubing`][url-repo]
 
-[![License][license-shield]][license-url]
-[![Terraform][terraform-workflow-shield]][terraform-workflow-url]
+[![License][shield-license]][url-license]
+[![Terraform][shield-workflow-terraform]][url-workflow-terraform]
 
-<!-- description -->
+This terraform module manages [shishifubing][url-owner] organization
 
-This terraform module manages [shishifubing][owner-url] organization:
+</div>
 
-- It manages repositories
-- It manages branch protection rules
-- It manages default branches
-- It manages organization settings
-- It manages organization membership
-- It mirrors all repositories in [shishifubing][owner-url] to [Gitlab][owner-gitlab-url]
+# About The Project
 
-> **Note**
->
-> Pull mirroring is a premium Gitlab feature,
-> so all Gitlab repositories are destroyed and then imported once a day
-> to "_mirror_" them
+## Features
 
-<!-- usage -->
+- Manages:
+  - repositories
+  - branch protection rules
+  - default branches
+  - organization settings
+  - organization membership
+- Mirrors all repositories in [shishifubing][url-owner] to [Gitlab][url-owner-gitlab]
+  > **Note**
+  >
+  > Pull mirroring is a premium Gitlab feature,
+  > so all Gitlab repositories are destroyed and then imported once a day
+  > to "_mirror_" them
 
 # Usage
 
@@ -34,13 +36,13 @@ This terraform module manages [shishifubing][owner-url] organization:
 >
 > 404 errors probably mean invalid token, check it
 
-### CI
+## CI
 
 - Commit
 - PR
 - Merge
 
-### Manual
+## Manual
 
 ```bash
 # export auth variables
@@ -49,7 +51,7 @@ This terraform module manages [shishifubing][owner-url] organization:
 terraform apply
 ```
 
-### Regenerate module documentation
+## Regenerate module documentation
 
 ```bash
 terraform-docs markdown table --recursive --output-file README.md .
@@ -57,7 +59,7 @@ terraform-docs markdown table --recursive --output-file README.md .
 
 # Getting started
 
-[Setup an s3 bucket, setup terraform][setup-url]
+[Setup an s3 bucket, setup terraform][url-setup]
 
 ```bash
 # export auth variables
@@ -79,20 +81,20 @@ terraform apply
 
 <!-- project links -->
 
-[repo-url]: https://github.com/shishifubing/infra-repos-shishifubing
-[license-url]: https://github.com/shishifubing/infra-repos-shishifubing/blob/main/LICENSE
-[terraform-workflow-url]: https://github.com/shishifubing/infra-repos-shishifubing/actions/workflows/terraform.yml
+[url-repo]: https://github.com/shishifubing/infra-repos-shishifubing
+[url-license]: https://github.com/shishifubing/infra-repos-shishifubing/blob/main/LICENSE
+[url-workflow-terraform]: https://github.com/shishifubing/infra-repos-shishifubing/actions/workflows/terraform.yml
 
 <!-- shield links -->
 
-[terraform-workflow-shield]: https://img.shields.io/github/actions/workflow/status/shishifubing/infra-repos-shishifubing/terraform.yml?label=Terraform&style=for-the-badge
-[license-shield]: https://img.shields.io/github/license/shishifubing/infra-repos-shishifubing.svg?style=for-the-badge
+[shield-workflow-terraform]: https://img.shields.io/github/actions/workflow/status/shishifubing/infra-repos-shishifubing/terraform.yml?label=Terraform&style=for-the-badge
+[shield-license]: https://img.shields.io/github/license/shishifubing/infra-repos-shishifubing.svg?style=for-the-badge
 
 <!-- external links -->
 
-[owner-url]: https://github.com/shishifubing
-[owner-gitlab-url]: https://gitlab.com/shishifubing
-[setup-url]: https://github.com/shishifubing/infra-cloud-shishifubing.com/tree/main/cloud/yandex#setup-terraform-backend-and-local-environment
+[url-owner]: https://github.com/shishifubing
+[url-owner-gitlab]: https://gitlab.com/shishifubing
+[url-setup]: https://github.com/shishifubing/infra-cloud-shishifubing.com/tree/main/cloud/yandex#setup-terraform-backend-and-local-environment
 
 # Module documentation
 
@@ -104,7 +106,6 @@ terraform apply
 | --------------------------------------------------------------- | ------- |
 | <a name="requirement_github"></a> [github](#requirement_github) | 5.14.0  |
 | <a name="requirement_gitlab"></a> [gitlab](#requirement_gitlab) | 15.7.1  |
-| <a name="requirement_null"></a> [null](#requirement_null)       | 3.2.1   |
 | <a name="requirement_time"></a> [time](#requirement_time)       | 0.9.1   |
 
 ## Providers
@@ -124,15 +125,16 @@ terraform apply
 
 ## Resources
 
-| Name                                                                                                                                                 | Type        |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| [github_branch_default.default](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/branch_default)                    | resource    |
-| [github_membership.bot](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/membership)                                | resource    |
-| [github_organization_settings.organization](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/organization_settings) | resource    |
-| [gitlab_project.repositories](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project)                                 | resource    |
-| [time_rotating.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/rotating)                                            | resource    |
-| [time_static.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/static)                                                | resource    |
-| [gitlab_group.group](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/data-sources/group)                                         | data source |
+| Name                                                                                                                                                               | Type        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| [github_actions_organization_permissions.main](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/actions_organization_permissions) | resource    |
+| [github_branch_default.default](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/branch_default)                                  | resource    |
+| [github_membership.bot](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/membership)                                              | resource    |
+| [github_organization_settings.organization](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/organization_settings)               | resource    |
+| [gitlab_project.repositories](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project)                                               | resource    |
+| [time_rotating.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/rotating)                                                          | resource    |
+| [time_static.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/static)                                                              | resource    |
+| [gitlab_group.group](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/data-sources/group)                                                       | data source |
 
 ## Inputs
 
