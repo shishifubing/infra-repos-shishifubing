@@ -33,6 +33,12 @@ module "branch_protections_wildcard" {
   }
 }
 
+resource "github_repository_tag_protection" "protections" {
+  for_each   = module.repositories
+  repository = each.value.repository.node_id
+  pattern    = "v*"
+}
+
 resource "github_branch_default" "default" {
   for_each = module.repositories
 
