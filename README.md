@@ -5,7 +5,7 @@
 [![License][shield-license]][url-license]
 [![Terraform][shield-workflow-terraform]][url-workflow-terraform]
 
-This terraform module manages [shishifubing][url-owner] organization
+Terraform module managing [shishifubing][url-owner] organization
 
 </div>
 
