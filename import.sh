@@ -72,6 +72,7 @@ for repo in "${repos[@]}"; do
     terraform import                          \
         "$(resource_rule_wildcard "${repo}")" \
         "${repo}:*"
+    terraform import "github_branch_default.default[\"${repo}\"]" "main"
 done
 
 for repo in "${gitlab_repos[@]}"; do
