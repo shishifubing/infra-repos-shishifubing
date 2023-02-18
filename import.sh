@@ -10,8 +10,12 @@ function resource_repository() {
     echo "module.repositories[\"${1}\"].github_repository.repository"
 }
 
-function resource_rule() {
-    echo "module.branch_protections[\"${1}\"].github_branch_protection.protection"
+function resource_rule_main() {
+    echo "module.branch_protections_main[\"${1}\"].github_branch_protection.protection"
+}
+
+function resource_rule_wildcard() {
+    echo "module.branch_protections_wildcard[\"${1}\"].github_branch_protection.protection"
 }
 
 function resource_gitlab() {
@@ -50,6 +54,8 @@ mapfile -t gitlab_repos < <(
     '
 )
 
+branch_protection_rules=("main" "*")
+
 terraform import                \
     "github_membership.bot"     \
     "${owner}:shishifubing-bot"
@@ -63,24 +69,10 @@ for repo in "${repos[@]}"; do
         "$(resource_repository "${repo}")" \
         "${repo}"
 
-    patterns=$(
-        gh api graphql                                               \
-            --raw-field query="{
-                repository(owner: \"${owner}\", name: \"${repo}\") {
-                    branchProtectionRules(first:100) {
-                        nodes {
-                            pattern
-                        }
-                    }
-                }
-            }"                                                       \
-            --template "${template_pattern}"
-    )
-    read -ra patterns <<<"${patterns}"
-    for pattern in "${patterns[@]}"; do
-        terraform import                            \
-            "$(resource_rule "${repo}/${pattern}")" \
-            "${repo}:${pattern}"
+    for rule in "${branch_protection_rules[@]}"; do
+        terraform import                 \
+            "$(resource_rule "${repo}")" \
+            "${repo}:${rule}"
     done
 done
 
