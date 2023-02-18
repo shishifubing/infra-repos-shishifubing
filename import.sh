@@ -4,19 +4,6 @@ set -Eeuxo pipefail
 owner="${1:-shishifubing}"
 
 template_name="{{ range . }}{{ .name }} {{ end }}"
-template_pattern="{{ range .data.repository.branchProtectionRules.nodes }}{{ .pattern }} {{ end }}"
-
-function resource_repository() {
-    echo "module.repositories[\"${1}\"].github_repository.repository"
-}
-
-function resource_rule() {
-    echo "module.branch_protections[\"${1}\"].github_branch_protection.protection"
-}
-
-function resource_gitlab() {
-    echo "gitlab_project.repositories[\"${1}\"]"
-}
 
 repos=$(
     gh repo list "${owner}"           \
@@ -59,36 +46,25 @@ terraform import                                \
     "${owner}"
 
 for repo in "${repos[@]}"; do
-    terraform import                       \
-        "$(resource_repository "${repo}")" \
+    terraform import                                                    \
+        "module.repositories[\"${repo}\"].github_repository.repository" \
         "${repo}"
-
-    patterns=$(
-        gh api graphql                                               \
-            --raw-field query="{
-                repository(owner: \"${owner}\", name: \"${repo}\") {
-                    branchProtectionRules(first:100) {
-                        nodes {
-                            pattern
-                        }
-                    }
-                }
-            }"                                                       \
-            --template "${template_pattern}"
-    )
-    read -ra patterns <<<"${patterns}"
-    for pattern in "${patterns[@]}"; do
-        terraform import                            \
-            "$(resource_rule "${repo}/${pattern}")" \
-            "${repo}:${pattern}"
-    done
+    terraform import                                                                      \
+        "module.branch_protections_main[\"${repo}\"].github_branch_protection.protection" \
+        "${repo}:main"
+    terraform import                                                                          \
+        "module.branch_protections_wildcard[\"${repo}\"].github_branch_protection.protection" \
+        "${repo}:*"
+    terraform import                                 \
+        "github_branch_default.default[\"${repo}\"]" \
+        "${repo}"
 done
 
 for repo in "${gitlab_repos[@]}"; do
     # gitlab repository names cannot start with a special character
     repo_name="${repo}"
     [[ "${repo:0:1}" == "." ]] && repo_name="dot-${repo:1}"
-    terraform import                   \
-        "$(resource_gitlab "${repo}")" \
+    terraform import                               \
+        "gitlab_project.repositories[\"${repo}\"]" \
         "${owner}/${repo_name}"
 done

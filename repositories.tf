@@ -6,39 +6,7 @@ locals {
   }
 
   # defaults for repositories
-  repositories_defaults = {
-    branch_protections = {
-      "main" = {
-        enforce_admins                  = true
-        required_approving_review_count = 0
-      }
-      "*" = {
-        required_linear_history = true
-        allows_deletions        = true
-        allows_force_pushes     = true
-      }
-    }
-  }
-
-  # create a map of branch_protections with unique keys for `for_each`
-  branch_protections = {
-    for item in local.branch_protections_list :
-    "${item.repository_id}/${item.pattern}" => item
-  }
-  # inject branch protection patterns and repository ids into all
-  # branch_protections defined in the configs
-  branch_protections_list = flatten([
-    for repository_name, repository_config in local.repositories : [
-      for branch_protection_pattern, branch_protection_config in
-      lookup(repository_config, "branch_protections", {}) : merge(
-        {
-          pattern       = branch_protection_pattern,
-          repository_id = repository_name
-        },
-        branch_protection_config
-      )
-    ]
-  ])
+  repositories_defaults = {}
 
   # dictionary of topics to reuse
   topics = {
