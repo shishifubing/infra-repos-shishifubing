@@ -22,6 +22,21 @@ resource "github_branch_default" "default" {
   branch     = "main"
 }
 
+resource "github_actions_organization_permissions" "main" {
+  allowed_actions      = "selected"
+  enabled_repositories = "all"
+  allowed_actions_config {
+    github_owned_allowed = true
+    verified_allowed     = true
+    patterns_allowed = [
+      "jurplel/install-qt-action@v3, jurplel/install-qt-action/action@v3",
+    ]
+  }
+}
+
+#
+# gitlab stuff
+#
 data "gitlab_group" "group" {
   full_path = local.owner
 }
