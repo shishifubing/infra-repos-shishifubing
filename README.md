@@ -69,6 +69,8 @@ terraform init -reconfigure -backend-config="main.s3.tfbackend"
 # clean the state (if you need to)
 terraform state rm $(terraform state list)
 # import existing repositories (if you need to)
+# full import takes around 10 minutes because of the number of resources and
+# Github's rate limiting
 ./import.sh
 # update the infrastructure
 terraform apply
