@@ -35,7 +35,7 @@ module "branch_protections_wildcard" {
 
 resource "github_repository_tag_protection" "protections" {
   for_each   = module.repositories
-  repository = each.value.repository.node_id
+  repository = each.value.repository.name
   pattern    = "v*"
 }
 
