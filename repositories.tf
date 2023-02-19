@@ -260,7 +260,7 @@ locals {
 
     "app-web-django-assignment" = {
       description = join(" ", [
-        "SSR web app I built for a Fullstack Python Web Developer course"
+        "SSR web app I built for a course, boring"
       ])
       homepage_url = join("/", [
         local.owner_url, "app-web-django-assignment"
