@@ -53,7 +53,8 @@ resource "github_actions_organization_permissions" "main" {
     github_owned_allowed = true
     verified_allowed     = true
     patterns_allowed = [
-      "jurplel/install-qt-action@v3, jurplel/install-qt-action/action@v3",
+      "jurplel/install-qt-action@v3",
+      "jurplel/install-qt-action/action@v3"
     ]
   }
 }
