@@ -97,7 +97,7 @@ terraform apply
 
 <!-- shield links -->
 
-[shield-workflow-terraform]: https://img.shields.io/github/actions/workflow/status/shishifubing/infra-repos-shishifubing/terraform.yml?label=Terraform&style=for-the-badge?branch=main
+[shield-workflow-terraform]: https://img.shields.io/github/actions/workflow/status/shishifubing/infra-repos-shishifubing/terraform.yml?label=Terraform&style=for-the-badge&branch=main
 [shield-license]: https://img.shields.io/github/license/shishifubing/infra-repos-shishifubing.svg?style=for-the-badge
 
 <!-- external links -->
