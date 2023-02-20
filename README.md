@@ -38,11 +38,10 @@ so I decided to write a terraform module to manage them
 
 > **Note**
 >
-> GitHub's servers are "eventually consistent", not "immediately consistent",
+> GitHub's servers are "eventually consistent", not "immediately consistent".
+> If you encounter errors (especially code 422), retry the operation
 >
-> if you encounter errors (especially code 422), retry the operation
->
-> 404 errors probably mean invalid token, check it
+> Code 404 is a sign of an invalid token, check it
 
 ## CI
 
