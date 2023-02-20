@@ -11,7 +11,7 @@ Terraform module managing [shishifubing][url-owner] organization
 
 # About The Project
 
-I have a decent number of repositories, it's a pain to keep them all uniform, 
+I have a decent number of repositories. It's a pain to keep them all uniform, 
 so I decided to write a terraform module to manage them
 
 ## Features
