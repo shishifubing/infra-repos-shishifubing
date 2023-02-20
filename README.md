@@ -9,12 +9,12 @@ Terraform module managing [shishifubing][url-owner] organization
 
 </div>
 
-# About The Project
+## About The Project
 
 I have a decent number of repositories. It's a pain to keep them all uniform, 
 so I decided to write a terraform module to manage them
 
-## Features
+### Features
 
 - Manages:
 
@@ -34,7 +34,7 @@ so I decided to write a terraform module to manage them
   > so all Gitlab repositories are destroyed and then imported once a day
   > to "_mirror_" them
 
-# Usage
+## Usage
 
 > **Note**
 >
@@ -43,14 +43,14 @@ so I decided to write a terraform module to manage them
 >
 > Code 404 is a sign of an invalid token, check it
 
-## CI
+### CI
 
 - Create a branch
 - Commit
 - PR
 - Merge
 
-## Manual
+### Manually
 
 ```bash
 # export auth variables
@@ -65,7 +65,7 @@ terraform apply
 terraform-docs markdown table --recursive --output-file README.md .
 ```
 
-# Getting started
+## Getting started
 
 [Setup an s3 bucket, setup terraform][url-setup]
 
@@ -105,8 +105,6 @@ terraform apply
 [url-owner]: https://github.com/shishifubing
 [url-owner-gitlab]: https://gitlab.com/shishifubing
 [url-setup]: https://github.com/shishifubing/infra-cloud-shishifubing.com/tree/main/cloud/yandex#setup-terraform-backend-and-local-environment
-
-# Module documentation
 
 <!-- BEGIN_TF_DOCS -->
 
