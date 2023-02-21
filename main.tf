@@ -20,7 +20,7 @@ module "branch_protections_main" {
       "commits" = {
         # https://github.com/marketplace/commitcheck
         # https://www.commitcheck.com 
-        contexts = ["CommitCheck"]
+        contexts = ["commitcheck/CommitCheck"]
         strict   = true
       }
     }
@@ -42,7 +42,7 @@ module "branch_protections_wildcard" {
       "commits" = {
         # https://github.com/marketplace/commitcheck
         # https://www.commitcheck.com
-        contexts = ["CommitCheck"]
+        contexts = ["commitcheck/CommitCheck"]
         strict   = true
       }
     }
