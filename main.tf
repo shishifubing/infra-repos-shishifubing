@@ -47,16 +47,8 @@ resource "github_branch_default" "default" {
 }
 
 resource "github_actions_organization_permissions" "main" {
-  allowed_actions      = "selected"
+  allowed_actions      = "all"
   enabled_repositories = "all"
-  allowed_actions_config {
-    github_owned_allowed = true
-    verified_allowed     = true
-    patterns_allowed = [
-      "jurplel/install-qt-action@v3",
-      "jurplel/install-qt-action/action@v3"
-    ]
-  }
 }
 
 #
