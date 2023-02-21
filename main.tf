@@ -17,9 +17,10 @@ module "branch_protections_main" {
     enforce_admins                  = true
     required_approving_review_count = 0
     required_status_checks = {
-      "commit-lint" = {
-        # https://github.com/apps/commit-lint
-        contexts = ["commit-lint", "commit-lint-pr"]
+      "commits" = {
+        # https://github.com/marketplace/commitcheck
+        # https://www.commitcheck.com 
+        contexts = ["CommitCheck"]
         strict   = true
       }
     }
@@ -38,10 +39,11 @@ module "branch_protections_wildcard" {
     allows_deletions        = true
     allows_force_pushes     = true
     required_status_checks = {
-      "commit-lint" = {
-        # https://github.com/apps/commit-lint
-        contexts = ["commit-lint", "commit-lint-pr"]
-        strict   = false
+      "commits" = {
+        # https://github.com/marketplace/commitcheck
+        # https://www.commitcheck.com
+        contexts = ["CommitCheck"]
+        strict   = true
       }
     }
   }
