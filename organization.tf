@@ -20,7 +20,7 @@ resource "github_team_repository" "admins" {
   for_each = module.repositories
 
   team_id    = github_team.admins.id
-  repository = each.value.name
+  repository = each.value.repository.name
   permission = "admin"
 }
 
