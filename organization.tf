@@ -1,6 +1,27 @@
 resource "github_membership" "bot" {
-  username = "${local.name}-bot"
+  username = "shishifubing-bot"
   role     = "member"
+}
+
+resource "github_team" "admins" {
+  name                      = "admins"
+  description               = "Grants admin rights to all shishifubing repositories"
+  privacy                   = "closed"
+  create_default_maintainer = true
+}
+
+resource "github_team_membership" "bot" {
+  team_id  = github_team.admins.id
+  username = github_membership.bot.username
+  role     = "maintainer"
+}
+
+resource "github_team_repository" "admins" {
+  for_each = module.repositories
+
+  team_id    = github_team.admins.id
+  repository = each.value.repository.name
+  permission = "admin"
 }
 
 resource "github_organization_settings" "organization" {
