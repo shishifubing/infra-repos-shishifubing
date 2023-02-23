@@ -6,6 +6,15 @@ variable "repository_name" {
 variable "config" {
   description = "repository config"
   default     = {}
+  validation {
+    error_message = <<EOT
+    Repository ${jsonencode(var.config)} is invalid
+
+    [{Resource: Field: Code: Message:A repository cannot have more than 20 topics.}]
+    EOT
+    condition     = length(var.config.topics) <= 20
+  }
+
   type = object({
     // general settings
     description                             = optional(string, "")
