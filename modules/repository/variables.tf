@@ -8,7 +8,7 @@ variable "config" {
   default     = {}
   validation {
     error_message = <<EOT
-    Repository ${var.config.name} is invalid
+    Repository ${var.config} is invalid
 
     [{Resource: Field: Code: Message:A repository cannot have more than 20 topics.}]
     EOT
