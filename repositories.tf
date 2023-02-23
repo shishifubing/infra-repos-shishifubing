@@ -241,7 +241,7 @@ locals {
       topics = concat(
         local.topics.go, local.topics.web, local.topics.webapp,
         local.topics.vuejs, local.topics.abandoned, local.topics.common,
-        ["redis", "spa", "postgresql", "scss", "vuex-store"]
+        []
       )
     }
 
