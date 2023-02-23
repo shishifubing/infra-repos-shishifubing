@@ -19,7 +19,7 @@ module "branch_protections_main" {
     required_status_checks = {
       "commits" = {
         # https://github.com/marketplace/commitcheck
-        # https://www.commitcheck.com 
+        # https://www.commitcheck.com
         contexts = ["CommitCheck"]
         strict   = true
       }
