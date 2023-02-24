@@ -2,12 +2,16 @@ name: terraform
 
 on:
   schedule:
-    # at the end of every day
+    # runs at 00:00
     - cron: 0 0 * * *
   push:
+    paths: 
+      - "**/*.tf"
     branches:
       - main
   pull_request:
+    paths:
+      - "**/*.tf"
 
 jobs:
   run:
