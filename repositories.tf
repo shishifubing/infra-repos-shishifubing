@@ -146,7 +146,9 @@ locals {
         local.topics.web, local.topics.common, local.topics.pages,
         []
       )
-      pages = {}
+      pages = {
+        cname = var.owner_fqdn
+      }
     }
 
     "snippets-golang-leetcode" = {

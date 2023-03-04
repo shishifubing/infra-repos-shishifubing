@@ -80,11 +80,11 @@ variable "config" {
       cname = optional(string)
       source = optional(
         object({
-          branch = optional(string, "main")
+          branch = optional(string, "ghpages")
           path   = optional(string, "/")
         }),
         {
-          branch = "main"
+          branch = "ghpages"
           path   = "/"
         }
       )
