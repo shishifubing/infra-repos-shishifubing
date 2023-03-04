@@ -13,3 +13,6 @@ import ::
 
 init ::
 	terraform init -reconfigure -backend-config="main.s3.tfbackend"
+
+list ::
+	terraform state list
