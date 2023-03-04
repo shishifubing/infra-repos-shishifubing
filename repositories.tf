@@ -23,7 +23,6 @@ locals {
     finished     = ["finished", "finished-project"]
     ghaction     = ["action", "actions", "github-action", "github-actions"]
     readme       = ["readme", "readme-profile"]
-    shields      = ["shieldsio", "shields-io"]
     template     = ["template", "template-project", "template-repository"]
     packer       = ["packer"]
     ci           = ["ci"]
@@ -114,7 +113,7 @@ locals {
         local.owner_url, "template-${local.owner}-default"
       ])
       topics = concat(
-        local.topics.common, local.topics.shields, local.topics.template,
+        local.topics.common, local.topics.template,
         []
       )
     }
@@ -147,7 +146,7 @@ locals {
         []
       )
       pages = {
-        cname = var.owner_fqdn
+        cname = local.owner_fqdn
       }
     }
 
