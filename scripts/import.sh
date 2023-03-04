@@ -2,15 +2,24 @@
 set -Eeuxo pipefail
 
 owner="${1:-shishifubing}"
+bot="${2:-${owner}-bot}"
 
-template_name="{{ range . }}{{ .name }} {{ end }}"
+function import() {
+    terraform import "${@}"
+}
 
-repos=$(
-    gh repo list "${owner}"           \
-        --json "name"                 \
-        --template "${template_name}"
+team_id=$(gh api "/orgs/${owner}/teams/admins" --jq .id)
+
+import "github_membership.bot" "${owner}:${bot}"
+import "github_organization_settings.organization" "${owner}"
+import "github_team.admins" "${team_id}"
+import "github_team_membership.bot" "${team_id}:${bot}"
+
+mapfile -t repos < <(
+    gh repo list "${owner}"                                     \
+        --json "name"                                           \
+        --template '{{ range . }}{{ .name }}{{ "\n" }}{{ end }}'
 )
-read -ra repos <<<"${repos}"
 
 mapfile -t gitlab_repos < <(
     glab api graphql --field query="
@@ -37,34 +46,21 @@ mapfile -t gitlab_repos < <(
     '
 )
 
-terraform import                \
-    "github_membership.bot"     \
-    "${owner}:shishifubing-bot"
-
-terraform import                                \
-    "github_organization_settings.organization" \
-    "${owner}"
-
 for repo in "${repos[@]}"; do
-    terraform import                                                    \
-        "module.repositories[\"${repo}\"].github_repository.repository" \
-        "${repo}"
-    terraform import                                                                      \
+    import "module.repositories[\"${repo}\"].github_repository.repository" "${repo}"
+    import                                                                                \
         "module.branch_protections_main[\"${repo}\"].github_branch_protection.protection" \
         "${repo}:main"
-    terraform import                                                                          \
+    import                                                                                    \
         "module.branch_protections_wildcard[\"${repo}\"].github_branch_protection.protection" \
         "${repo}:*"
-    terraform import                                 \
-        "github_branch_default.default[\"${repo}\"]" \
-        "${repo}"
+    import "github_branch_default.default[\"${repo}\"]" "${repo}"
+    import "github_team_repository.admins[\"${repo}\"]" "${team_id}:${repo}"
 done
 
 for repo in "${gitlab_repos[@]}"; do
-    # gitlab repository names cannot start with a special character
+    # gitlab's repository names cannot start with a special character
     repo_name="${repo}"
     [[ "${repo:0:1}" == "." ]] && repo_name="dot-${repo:1}"
-    terraform import                               \
-        "gitlab_project.repositories[\"${repo}\"]" \
-        "${owner}/${repo_name}"
+    import "gitlab_project.repositories[\"${repo}\"]" "${owner}/${repo_name}"
 done
