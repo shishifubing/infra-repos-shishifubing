@@ -53,8 +53,8 @@ locals {
         "https://${local.owner_fqdn}"
       ])
       topics = concat(
-        local.topics.common,
-        ["github-io", "github-pages"]
+        local.topics.common, local.topics.pages,
+        []
       )
       pages = {
         cname = local.owner_fqdn
