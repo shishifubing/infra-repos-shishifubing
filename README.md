@@ -23,6 +23,7 @@ so I decided to write a terraform module to manage them
   - default branches
   - organization settings
   - organization membership
+  - organization teams
   - github action permissions
   - tag protection rules
 
