@@ -32,8 +32,7 @@ so I decided to write a terraform module to manage them
   > **Note**
   >
   > Pull mirroring is a premium Gitlab feature,
-  > so all Gitlab repositories are destroyed and then imported once a day
-  > to "_mirror_" them
+  > so all Gitlab repositories are destroyed and then imported to "_mirror_" them
 
 ## Usage
 
