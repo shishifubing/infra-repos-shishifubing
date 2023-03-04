@@ -56,13 +56,13 @@ so I decided to write a terraform module to manage them
 # export auth variables
 . ./scripts/variables.sh
 # update the infrastructure
-terraform apply
+make
 ```
 
-## Regenerate module documentation
+### Regenerate module documentation
 
 ```bash
-./scripts/docs.sh
+make docs
 ```
 
 ## Getting started
@@ -73,15 +73,15 @@ terraform apply
 # export auth variables
 . ./scripts/variables.sh
 # initialize the backend
-terraform init -reconfigure -backend-config="main.s3.tfbackend"
+make init
 # clean the state (if you need to)
-./scripts/clean.sh
+make clean
 # import existing repositories (if you need to)
 # full import takes around 10 minutes because of the number of resources and
 # Github's rate limiting
-./scripts/import.sh
+make import
 # update the infrastructure
-terraform apply
+make
 ```
 
 <!-- relative links -->
@@ -140,6 +140,10 @@ terraform apply
 | [github_branch_default.default](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/branch_default)                                  | resource    |
 | [github_membership.bot](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/membership)                                              | resource    |
 | [github_organization_settings.organization](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/organization_settings)               | resource    |
+| [github_repository_tag_protection.protections](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/repository_tag_protection)        | resource    |
+| [github_team.admins](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/team)                                                       | resource    |
+| [github_team_membership.bot](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/team_membership)                                    | resource    |
+| [github_team_repository.admins](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/team_repository)                                 | resource    |
 | [gitlab_project.repositories](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project)                                               | resource    |
 | [time_rotating.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/rotating)                                                          | resource    |
 | [time_static.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/static)                                                              | resource    |
