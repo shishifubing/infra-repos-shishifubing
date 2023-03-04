@@ -51,7 +51,9 @@ for repo in "${repos[@]}"; do
         gh api "/repos/${owner}/${repo}/tags/protection" --jq .[].id
     )
     for tag_protection in "${tag_protections[@]}"; do
-        import "github_repository_tag_protection.protections" "${repo}/${tag_protection}"
+        import                                                          \
+            "github_repository_tag_protection.protections[\"${repo}\"]" \
+            "${repo}/${tag_protection}"
     done
     import "module.repositories[\"${repo}\"].github_repository.repository" "${repo}"
     import                                                                                \
