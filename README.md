@@ -62,7 +62,7 @@ terraform apply
 ## Regenerate module documentation
 
 ```bash
-terraform-docs markdown table --recursive --output-file README.md .
+./scripts/docs.sh
 ```
 
 ## Getting started
@@ -75,7 +75,7 @@ terraform-docs markdown table --recursive --output-file README.md .
 # initialize the backend
 terraform init -reconfigure -backend-config="main.s3.tfbackend"
 # clean the state (if you need to)
-terraform state rm $(terraform state list)
+./scripts/clean.sh
 # import existing repositories (if you need to)
 # full import takes around 10 minutes because of the number of resources and
 # Github's rate limiting
