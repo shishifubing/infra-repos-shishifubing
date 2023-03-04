@@ -11,7 +11,7 @@ Terraform module managing [shishifubing][url-owner] organization
 
 ## About The Project
 
-I have a decent number of repositories. It's a pain to keep them all uniform, 
+I have a decent number of repositories. It's a pain to keep them all uniform,
 so I decided to write a terraform module to manage them
 
 ### Features
@@ -54,7 +54,7 @@ so I decided to write a terraform module to manage them
 
 ```bash
 # export auth variables
-. ./variables.sh
+. ./scripts/variables.sh
 # update the infrastructure
 terraform apply
 ```
@@ -71,7 +71,7 @@ terraform-docs markdown table --recursive --output-file README.md .
 
 ```bash
 # export auth variables
-. ./variables.sh
+. ./scripts/variables.sh
 # initialize the backend
 terraform init -reconfigure -backend-config="main.s3.tfbackend"
 # clean the state (if you need to)
@@ -79,7 +79,7 @@ terraform state rm $(terraform state list)
 # import existing repositories (if you need to)
 # full import takes around 10 minutes because of the number of resources and
 # Github's rate limiting
-./import.sh
+./scripts/import.sh
 # update the infrastructure
 terraform apply
 ```
