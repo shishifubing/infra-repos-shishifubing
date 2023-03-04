@@ -1,4 +1,4 @@
-name: labeler-issue-triage
+name: reuse / labeler-issue-triage
 
 on:
   issues:

@@ -1,4 +1,4 @@
-name: Tag
+name: reuse / tag
 
 on:
   push:
