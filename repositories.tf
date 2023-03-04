@@ -10,7 +10,7 @@ locals {
 
   # dictionary of topics to reuse
   topics = {
-    common       = [local.owner, "semver", "conventional-commits"]
+    common       = [local.owner]
     yandex_cloud = ["cloud", "yandex-cloud"]
     terraform    = ["infrastructure", "terraform", "terraform-module", "infrastructure-as-code"]
     nexus        = ["nexus", "sonatype-nexus", "nexus3", "sonatype-nexus3"]
