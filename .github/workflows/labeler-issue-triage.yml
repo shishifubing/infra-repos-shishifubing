@@ -1,0 +1,10 @@
+name: labeler-issue-triage
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  call:
+    uses: shishifubing/ci-actions-common/.github/workflows/labeler-issue-triage.yml@main
+    secrets: inherit

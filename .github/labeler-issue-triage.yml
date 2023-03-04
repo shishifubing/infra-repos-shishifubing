@@ -1,0 +1,11 @@
+critical:
+  - (critical|urgent)
+
+bug:
+  - "panic:"
+
+crash:
+  - "panic:"
+#
+#needs-triage:
+#  - ".*"
