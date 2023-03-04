@@ -11,7 +11,7 @@ Terraform module managing [shishifubing][url-owner] organization
 
 ## About The Project
 
-I have a decent number of repositories. It's a pain to keep them all uniform, 
+I have a decent number of repositories. It's a pain to keep them all uniform,
 so I decided to write a terraform module to manage them
 
 ### Features
@@ -23,6 +23,7 @@ so I decided to write a terraform module to manage them
   - default branches
   - organization settings
   - organization membership
+  - organization teams
   - github action permissions
   - tag protection rules
 
@@ -31,8 +32,7 @@ so I decided to write a terraform module to manage them
   > **Note**
   >
   > Pull mirroring is a premium Gitlab feature,
-  > so all Gitlab repositories are destroyed and then imported once a day
-  > to "_mirror_" them
+  > so all Gitlab repositories are destroyed and then imported to "_mirror_" them
 
 ## Usage
 
@@ -54,15 +54,15 @@ so I decided to write a terraform module to manage them
 
 ```bash
 # export auth variables
-. ./variables.sh
+. ./scripts/variables.sh
 # update the infrastructure
-terraform apply
+make
 ```
 
-## Regenerate module documentation
+### Regenerate module documentation
 
 ```bash
-terraform-docs markdown table --recursive --output-file README.md .
+make docs
 ```
 
 ## Getting started
@@ -71,17 +71,17 @@ terraform-docs markdown table --recursive --output-file README.md .
 
 ```bash
 # export auth variables
-. ./variables.sh
+. ./scripts/variables.sh
 # initialize the backend
-terraform init -reconfigure -backend-config="main.s3.tfbackend"
+make init
 # clean the state (if you need to)
-terraform state rm $(terraform state list)
+make clean
 # import existing repositories (if you need to)
 # full import takes around 10 minutes because of the number of resources and
 # Github's rate limiting
-./import.sh
+make import
 # update the infrastructure
-terraform apply
+make
 ```
 
 <!-- relative links -->
@@ -140,6 +140,10 @@ terraform apply
 | [github_branch_default.default](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/branch_default)                                  | resource    |
 | [github_membership.bot](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/membership)                                              | resource    |
 | [github_organization_settings.organization](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/organization_settings)               | resource    |
+| [github_repository_tag_protection.protections](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/repository_tag_protection)        | resource    |
+| [github_team.admins](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/team)                                                       | resource    |
+| [github_team_membership.bot](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/team_membership)                                    | resource    |
+| [github_team_repository.admins](https://registry.terraform.io/providers/integrations/github/5.14.0/docs/resources/team_repository)                                 | resource    |
 | [gitlab_project.repositories](https://registry.terraform.io/providers/gitlabhq/gitlab/15.7.1/docs/resources/project)                                               | resource    |
 | [time_rotating.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/rotating)                                                          | resource    |
 | [time_static.day](https://registry.terraform.io/providers/hashicorp/time/0.9.1/docs/resources/static)                                                              | resource    |

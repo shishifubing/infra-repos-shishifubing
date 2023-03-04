@@ -10,7 +10,7 @@ locals {
 
   # dictionary of topics to reuse
   topics = {
-    common       = [local.owner, "semver", "conventional-commits"]
+    common       = [local.owner]
     yandex_cloud = ["cloud", "yandex-cloud"]
     terraform    = ["infrastructure", "terraform", "terraform-module", "infrastructure-as-code"]
     nexus        = ["nexus", "sonatype-nexus", "nexus3", "sonatype-nexus3"]
@@ -23,7 +23,6 @@ locals {
     finished     = ["finished", "finished-project"]
     ghaction     = ["action", "actions", "github-action", "github-actions"]
     readme       = ["readme", "readme-profile"]
-    shields      = ["shieldsio", "shields-io"]
     template     = ["template", "template-project", "template-repository"]
     packer       = ["packer"]
     ci           = ["ci"]
@@ -54,8 +53,8 @@ locals {
         "https://${local.owner_fqdn}"
       ])
       topics = concat(
-        local.topics.common,
-        ["github-io", "github-pages"]
+        local.topics.common, local.topics.pages,
+        []
       )
       pages = {
         cname = local.owner_fqdn
@@ -114,7 +113,7 @@ locals {
         local.owner_url, "template-${local.owner}-default"
       ])
       topics = concat(
-        local.topics.common, local.topics.shields, local.topics.template,
+        local.topics.common, local.topics.template,
         []
       )
     }
@@ -146,7 +145,9 @@ locals {
         local.topics.web, local.topics.common, local.topics.pages,
         []
       )
-      pages = {}
+      pages = {
+        cname = local.owner_fqdn
+      }
     }
 
     "snippets-golang-leetcode" = {
