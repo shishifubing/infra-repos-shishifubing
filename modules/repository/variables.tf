@@ -80,7 +80,7 @@ variable "config" {
       cname = optional(string)
       source = optional(
         object({
-          branch = optional(string, "ghpages")
+          branch = optional(string, "gh-pages")
           path   = optional(string, "/")
         }),
         {
