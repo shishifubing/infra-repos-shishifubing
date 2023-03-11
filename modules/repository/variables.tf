@@ -42,7 +42,7 @@ variable "config" {
     has_projects  = optional(bool, false)
 
     // PR settings
-    allow_auto_merge            = optional(bool, false)
+    allow_auto_merge            = optional(bool, true)
     allow_merge_commit          = optional(bool, true)
     allow_rebase_merge          = optional(bool, true)
     allow_squash_merge          = optional(bool, false)
