@@ -26,7 +26,6 @@ resource "github_team_repository" "admins" {
 
 resource "github_organization_settings" "organization" {
   billing_email                                                = local.email
-  email                                                        = local.email
   company                                                      = local.name
   blog                                                         = local.site
   description                                                  = local.bio
