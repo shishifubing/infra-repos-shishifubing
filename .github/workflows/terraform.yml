@@ -15,6 +15,10 @@ on:
       - "**/*.tf"
       - .github/**/*
 
+concurrency:
+  cancel-in-progress: true
+  group: terraform-${{ github.head_ref || github.run_id }}
+
 jobs:
   run:
     runs-on: ubuntu-latest

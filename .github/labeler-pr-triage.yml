@@ -1,18 +1,14 @@
-#needs-triage:
-#  - "**/*"
+# config for https://github.com/actions/labeler
 
 repo:
   - "*"
 
-documentation:
+docs:
   - docs/**/*
-  - "*.md"
+  - any: ["*.md", "!CHANGELOG.md"]
 
-github-actions:
+website:
+  - website/**/*
+
+ci:
   - .github/**/*
-
-dependencies:
-  - .github/dependabot.yml
-
-examples:
-  - examples/**/*
