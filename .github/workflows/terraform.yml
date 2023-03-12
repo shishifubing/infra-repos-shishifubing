@@ -29,6 +29,7 @@ jobs:
     steps:
       - name: Run terraform
         uses: shishifubing/ci-actions-common/actions/terraform@main
+        continue-on-error: true
       
       - name: Rerun terraform
         if: failure()
