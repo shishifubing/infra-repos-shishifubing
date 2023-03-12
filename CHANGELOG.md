@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.9.19 - 2023-03-12
+
+### Documentation
+
+- **readme**: update workflow badge by @tiandaoburen in [#86](https://github.com/shishifubing/infra-repos-shishifubing/pull/86)
+
+**Full Changelog**: https://github.com/shishifubing/infra-repos-shishifubing/compare/v0.9.12...v0.9.19
+
 ## v0.9.12 - 2023-03-11
 
 ### Feature
