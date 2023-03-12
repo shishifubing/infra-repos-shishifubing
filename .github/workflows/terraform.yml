@@ -25,5 +25,9 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.TERRAFORM_TOKEN_GITHUB }}
 
     steps:
-      - name: run terraform
+      - name: Run terraform
+        uses: shishifubing/ci-actions-common/actions/terraform@main
+      
+      - name: Rerun terraform
+        if: failure()
         uses: shishifubing/ci-actions-common/actions/terraform@main
