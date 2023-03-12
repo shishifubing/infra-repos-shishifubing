@@ -7,11 +7,13 @@ on:
   push:
     paths: 
       - "**/*.tf"
+      - .github/**
     branches:
       - main
   pull_request:
-    paths:
+    paths: 
       - "**/*.tf"
+      - .github/**/*
 
 jobs:
   run:
