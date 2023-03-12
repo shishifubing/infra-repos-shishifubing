@@ -105,7 +105,7 @@ make
 
 <!-- badge links -->
 
-[badge-workflow-terraform]: https://github.com/shishifubing/infra-repos-shishifubing/actions/workflows/terraform.yml/badge.svg?branch=main
+[badge-workflow-terraform]: https://img.shields.io/github/actions/workflow/status/shishifubing/infra-repos-shishifubing/terraform.yml?branch=main&label=terraform&logo=github
 [badge-license]: https://img.shields.io/github/license/shishifubing/infra-repos-shishifubing.svg
 [badge-conventionalcommits]: https://img.shields.io/badge/conventional%20commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white
 
