@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.9.21 - 2023-03-13
+
+<!-- Automatically generated in https://github.com/shishifubing/infra-repos-shishifubing/actions/runs/4410350923 -->
+### Bug Fixes
+
+- **org**: remove bio by @tiandaoburen in [#88](https://github.com/shishifubing/infra-repos-shishifubing/pull/88)
+
+**Full Changelog**: https://github.com/shishifubing/infra-repos-shishifubing/compare/v0.9.19...v0.9.21
+
 ## v0.9.19 - 2023-03-12
 
 ### Documentation
