@@ -28,7 +28,6 @@ resource "github_organization_settings" "organization" {
   billing_email                                                = local.email
   company                                                      = local.name
   blog                                                         = local.site
-  description                                                  = local.bio
   has_organization_projects                                    = true
   has_repository_projects                                      = true
   default_repository_permission                                = "read"
