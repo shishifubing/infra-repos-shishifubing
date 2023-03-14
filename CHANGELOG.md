@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.9.22 - 2023-03-14
+
+<!-- Automatically generated in https://github.com/shishifubing/infra-repos-shishifubing/actions/runs/4420990851 -->
+**Full Changelog**: https://github.com/shishifubing/infra-repos-shishifubing/compare/v0.9.21...v0.9.22
+
 ## v0.9.21 - 2023-03-13
 
 <!-- Automatically generated in https://github.com/shishifubing/infra-repos-shishifubing/actions/runs/4410350923 -->
